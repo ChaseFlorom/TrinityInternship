@@ -10,11 +10,17 @@
   </head>
 
   <body>
-    <%= render 'layouts/navbar'%>
-    <div class="container">
-      <div class="card-panel z-depth-4">
-        <%= yield %>
+    <main>
+      <%= render 'layouts/navbar'%>
+      <div class="container">
+        <div class="card-panel z-depth-4">
+          <%= yield %>
+        </div>
       </div>
-    </div>
+    </main>
+    <footer>
+      <%= render 'layouts/footer'%> 
+    </footer>
+
   </body>
 </html>
