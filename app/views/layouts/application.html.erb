@@ -10,6 +10,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/navbar'%>
+    <div class="container">
+      <div class="card-panel z-depth-4">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
