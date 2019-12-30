@@ -1,8 +1,10 @@
 <%if user_signed_in?%>
-<h1>Welcome <%current_user.email%></h1>
+<h1>Welcome <%=current_user.firstname if current_user.firstname%></h1>
 <p>Welcome Page</p>
 <%else%>
-
+<div class="card-image">
+    <%= image_tag "learning.png", class: "responsive-img" %>
+</div>
 <h1>Trinity Internship</h1>
 <p>Welcome Page</p>
 <%end%>
