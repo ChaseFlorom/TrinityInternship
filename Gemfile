@@ -5,6 +5,7 @@ ruby '2.6.3'
 gem 'devise'
 gem 'materialize-sass'
 gem 'jquery-rails'
+gem 'will_paginate-materialize', git: 'https://github.com/mldoscar/will_paginate-materialize', branch: 'master'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use sqlite3 as the database for Active Record

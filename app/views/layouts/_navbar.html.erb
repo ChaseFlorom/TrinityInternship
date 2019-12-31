@@ -5,13 +5,11 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <%if user_signed_in?%>
                     <li><a href="sass.html">Modules</a></li>
-                    <li><a href="badges.html">Interns</a></li>
+                    <li><%= link_to('Interns', interns_path) %></li>  
                     <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>  
-                    
                 <%else%>
                     <li><%=link_to "Sign In", new_user_session_path%></li>
                     <li><%=link_to "Sign Up", new_user_registration_path%></li>
-                    
                 <%end%>
                 
             </ul>
