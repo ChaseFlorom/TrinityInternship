@@ -9,18 +9,18 @@ class UnitsController < ApplicationController
         @unit.save
         if @unit.save
             flash[:success] = "The unit was successfully submitted."
-            redirect_to root_path
+            redirect_to units_path
         else 
             render 'new'
         end
     end
     
     def show
-       @units = Unit.all 
+        @unit = Unit.find(params[:id])
     end
     
     def index
-        
+       @units = Unit.paginate(page: params[:page], per_page: 9)
     end
     
     

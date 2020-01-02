@@ -1,20 +1,29 @@
+<p align = "right">
+  <%=link_to "Create Unit", new_unit_path, class: "waves-effect waves-light btn-small blue"%>
+</p>
+
 <h2 align = "center">UNITS</h2>
 
 
 <div class="row">
-    <div class="col s12 m4">
-      <div class="card">
-        <div class="card-image">
-          <%= image_tag "office.jpg", class: "responsive-img" %>
+    <% @units.each do |unit| %>
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-image">
+              <%= link_to image_tag("office.jpg"), unit_path(unit.id) %>
+            </div>
+            <div class="card-content">
+                <span class="card-title black-text"><%=link_to unit.name, unit_path(unit.id)%></span>
+                <p>I am a very simple card. I am good at containing small bits of information.
+                I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+              <%=link_to "Open Class", unit_path(unit.id)%>
+            </div>
+          </div>
         </div>
-        <div class="card-content">
-            <span class="card-title black-text">Card Title</span>
-            <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    <%end%>
+</div>
+<div align = "center">
+    <%= will_paginate @users %>
+</div>
