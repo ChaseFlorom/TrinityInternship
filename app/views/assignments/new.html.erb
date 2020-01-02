@@ -1,5 +1,8 @@
 <%= form_for(@assignment, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
     <div class="form-group">
+        <div>
+            <%= f.collection_select :units, Unit.order(:name),:id,:name,{ prompt: "Choose a unit" }, include_blank: true, placeholder: "Select Unit" %>
+        </div>
         <div class="control-label col-sm-2">
             <%= f.label :name %>
         </div>
