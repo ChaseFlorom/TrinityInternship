@@ -4,7 +4,6 @@ class AssignmentsController < ApplicationController
     end
     
     def create
-        debugger
         @assignment = Assignment.new(assignment_params)
         @assignment.save
         if @assignment.save

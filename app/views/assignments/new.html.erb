@@ -1,9 +1,12 @@
 <%= form_for(@assignment, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
     <div class="form-group">
-        <div>
-            <%= f.collection_select(:unit_ids, Unit.all, :id, :name, placeholder: "Units" )%>
+        <div class = "xtrapadding">
+            <%=f.label "Select Unit(s) for Assignment"%>
+            <%= f.collection_select(:unit_ids, Unit.all, :id, :name, {placeholder: "Units"}, {multiple: true} )%>
             
         </div>
+        
+
 
         <div>
               <%= f.text_field :name, class:"form-control", placeholder: "Title of Assignment", autofocus: true %> 
