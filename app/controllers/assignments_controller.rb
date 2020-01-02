@@ -4,6 +4,7 @@ class AssignmentsController < ApplicationController
     end
     
     def create
+        debugger
         @assignment = Assignment.new(assignment_params)
         @assignment.save
         if @assignment.save
@@ -22,6 +23,6 @@ class AssignmentsController < ApplicationController
     private
     
     def assignment_params
-        params.require(:assignment).permit(:name, :description, :duedate, unit_ids: [], user_ids: [])
+        params.require(:assignment).permit(:name, :description, :duedate, unit_ids: [])
     end
 end
