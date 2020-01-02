@@ -4,7 +4,7 @@
             <%= link_to "Trinity Internship", root_path, class: "brand-logo"%>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <%if user_signed_in?%>
-                    <li><a href="sass.html">Modules</a></li>
+                    <li><%= link_to('Units', units_path) %></li>  
                     <li><%= link_to('Interns', interns_path) %></li>  
                     <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>  
                 <%else%>
