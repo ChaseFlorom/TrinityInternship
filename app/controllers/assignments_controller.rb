@@ -1,4 +1,5 @@
 class AssignmentsController < ApplicationController
+
     def new
           @assignment =  Assignment.new
           if params[:unit_ids]
@@ -19,6 +20,7 @@ class AssignmentsController < ApplicationController
     
     def show
         @assignment = Assignment.find(params[:id])
+        @submission = Submission.new
     end
     
     def destroy
