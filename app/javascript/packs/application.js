@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 require('materialize-css/dist/js/materialize')
 
-
+require("trix")
+require("@rails/actiontext")
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
@@ -43,3 +44,5 @@ document.addEventListener("turbolinks:load", function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
   });
+require("trix")
+require("@rails/actiontext")
