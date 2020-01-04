@@ -28,6 +28,7 @@ class UnitsController < ApplicationController
     def destroy
         @unit = Unit.find(params[:id])
         @unit.destroy
+        flash[:danger] = "You have deleted that unit."
         redirect_to units_path
     end
     
