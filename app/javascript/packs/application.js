@@ -37,3 +37,9 @@ document.addEventListener("turbolinks:load", function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
   });
+  
+//Collapsable
+document.addEventListener("turbolinks:load", function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });

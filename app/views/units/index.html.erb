@@ -19,6 +19,7 @@
             </div>
             <div class="card-action">
               <%=link_to "Open Class", unit_path(unit.id)%>
+              <%=link_to "Delete Class", unit_path(unit.id), method: :delete, data: {confirm: "Are you sure you want to delete this article?"}, class: 'red-text'%>
             </div>
           </div>
         </div>

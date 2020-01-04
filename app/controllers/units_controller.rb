@@ -17,12 +17,19 @@ class UnitsController < ApplicationController
     
     def show
         @unit = Unit.find(params[:id])
+        @assignments = @unit.assignments
+
     end
     
     def index
        @units = Unit.paginate(page: params[:page], per_page: 9)
     end
     
+    def destroy
+        @unit = Unit.find(params[:id])
+        @unit.destroy
+        redirect_to units_path
+    end
     
     private
     

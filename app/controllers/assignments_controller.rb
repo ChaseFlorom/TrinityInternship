@@ -9,10 +9,9 @@ class AssignmentsController < ApplicationController
     
     def create
         @assignment = Assignment.new(assignment_params)
-        @assignment.save
         if @assignment.save
             flash[:success] = "The unit was successfully submitted."
-            redirect_to units_path
+            redirect_to unit_path(@assignment.units.ids)
         else 
             render 'new'
         end        
