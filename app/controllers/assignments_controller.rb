@@ -18,9 +18,16 @@ class AssignmentsController < ApplicationController
     end
     
     def show
-        
+        @assignment = Assignment.find(params[:id])
     end
     
+    def destroy
+        @assignment = Assignment.find(params[:id])
+        @assignment.destroy
+        flash[:danger] = "You have deleted that assignment."
+        redirect_back(fallback_location: root_path)
+                
+    end
     
     private
     
