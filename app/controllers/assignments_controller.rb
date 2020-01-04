@@ -1,6 +1,10 @@
 class AssignmentsController < ApplicationController
     def new
-        @assignment = Assignment.new
+          @assignment =  Assignment.new
+          if params[:unit_ids]
+              puts "fired"
+            @assignment.unit_ids = params[:unit_ids]
+          end
     end
     
     def create
