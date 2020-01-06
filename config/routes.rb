@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'interns', to: 'users#index'
   resources :units
   resources :assignments
+  resources :submissions
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

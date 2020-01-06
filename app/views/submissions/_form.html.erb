@@ -1,0 +1,10 @@
+<%= form_for(@submission, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
+  
+    <input id="x" value="Editor content goes here" type="hidden" name="content">
+    <trix-editor input="x"></trix-editor>
+    <div class="form-group" id="submitbutton">
+        <div align = "center">
+            <%= f.submit  class: "btn waves-effect waves-light blue" %>
+        </div>
+    </div>
+<%end%>
