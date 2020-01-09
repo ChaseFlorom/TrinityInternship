@@ -1,13 +1,17 @@
-<%= form_with model: @submission do |form| %>
-    <div class="field">
-        <%= form.label :content %>
-        <%= form.rich_text_area :content %>
-    </div>
-    <div class="form-group" id="submitbutton">
-        <div align = "center">
-            <%= form.submit  class: "btn waves-effect waves-light" %>
-        </div>
-    </div>
-    <%@submission.assignment_id = Assignment.find(params[:id]).id%>
+<%= render 'shared/errors', obj: @submission %>
 
+
+<%= form_with model: @submission do |form| %>
+
+  <%= form.text_field :assignment_id, value: @assignment.id, class: 'hidden' %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.rich_text_area :content %>
+  </div>
+  <div class="form-group" id="submitbutton">
+    <div align = "center">
+        <%= form.submit  class: "btn waves-effect waves-light" %>
+    </div>
+  </div>
 <% end %>

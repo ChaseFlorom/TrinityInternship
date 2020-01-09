@@ -21,6 +21,7 @@ class AssignmentsController < ApplicationController
     def show
         @assignment = Assignment.find(params[:id])
         @submission = Submission.new
+        @submissions = @assignment.submissions 
     end
     
     def destroy
