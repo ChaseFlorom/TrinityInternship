@@ -1,5 +1,6 @@
 
 <h2 align = "center"><%=@assignment.name%></h2>
+<h4 align = "center">Due: <%=@assignment.duedate.to_formatted_s(:month_and_year)%></h2>
 <p><%=@assignment.description%></p>
 
 
