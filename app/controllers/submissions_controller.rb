@@ -5,6 +5,7 @@ class SubmissionsController < ApplicationController
     def create
         @submission = Submission.new(submission_params)
         @submission.user_id = current_user.id
+        @submission.ontime =  !@submission.assignment.duedate.past?
         if @submission.save
             flash[:success] = "The submission was successfully submitted."
             redirect_to assignment_path(@submission.assignment)
@@ -29,7 +30,7 @@ class SubmissionsController < ApplicationController
     private
     
     def submission_params
-        params.require(:submission).permit(:user_id, :assignment_id, :content)
+        params.require(:submission).permit(:user_id, :assignment_id, :content, :ontime)
     end
 
 end

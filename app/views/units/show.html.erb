@@ -1,6 +1,8 @@
 <h2 align = "center"><%=@unit.name%></h2>
 <p align = "right">
-  <%=link_to "Create Assignment", new_assignment_path(unit_ids: @unit.id), class: "waves-effect waves-light btn-small blue"%>
+  <%if current_user.role == "teacher" || current_user.admin == true%>
+    <%=link_to "Create Assignment", new_assignment_path(unit_ids: @unit.id), class: "waves-effect waves-light btn-small blue"%>
+  <%end%>
 </p>
 
 

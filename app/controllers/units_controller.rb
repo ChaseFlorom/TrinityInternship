@@ -1,5 +1,6 @@
 class UnitsController < ApplicationController
-    
+    before_action :require_teacher, except: [:show, :index]
+
     def new
         @unit = Unit.new
     end
@@ -36,6 +37,15 @@ class UnitsController < ApplicationController
     
     def unit_params
         params.require(:unit).permit(:name)
+    end
+    
+    def require_teacher
+        if current_user.role == "teacher" || current_user.admin == true
+        
+        else    
+            redirect_to units_path
+            flash[:danger] = "You do not have the required permissions to do that."
+        end
     end
 
 end

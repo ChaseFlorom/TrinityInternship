@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col s12 m12">
+      <div class="card fill-width">
+        <div class="card-content">
+          <span class="card-title">
+            <div class = "row">
+              <i class="material-icons circle">account_circle</i>
+              <b><%="#{obj.user.firstname} #{obj.user.lastname}" %> </b>
+              <span class = "grey-text"><small>Submitted <%=obj.created_at.to_formatted_s(:month_and_year)%></small></span>
+              <%if !obj.ontime%>
+                <div class="chip yellow lighten-2">
+                  <p align = "center"><b>Late</b></p>
+                </div>
+              <%end%>    
+            </div>
+          </span>
+          <p><%=obj.content%></p>
+        </div>
+        <div class="card-action">
+          <%=link_to "Delete Submission", submission_path(obj.id), method: :delete, data: {confirm: "Are you sure you want to delete this submission?"}, class: 'red-text'%>
+        </div>
+      </div>
+    </div>
+</div>

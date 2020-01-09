@@ -1,4 +1,5 @@
 class AssignmentsController < ApplicationController
+    before_action :require_teacher, except: [:show, :index]
 
     def new
           @assignment =  Assignment.new
@@ -10,6 +11,7 @@ class AssignmentsController < ApplicationController
     
     def create
         @assignment = Assignment.new(assignment_params)
+        @assignment.duedate = @assignment.duedate.change({ hour: 23, min: 59, sec: 59 })
         if @assignment.save
             flash[:success] = "The unit was successfully submitted."
             redirect_to unit_path(@assignment.units.ids)
@@ -36,5 +38,14 @@ class AssignmentsController < ApplicationController
     
     def assignment_params
         params.require(:assignment).permit(:name, :description, :duedate, unit_ids: [])
+    end
+    
+    def require_teacher
+        if current_user.role == "teacher" || current_user.admin == true
+        
+        else    
+            redirect_to units_path
+            flash[:danger] = "You do not have the required permissions to do that."
+        end
     end
 end

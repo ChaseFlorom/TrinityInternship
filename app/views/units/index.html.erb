@@ -1,5 +1,7 @@
 <p align = "right">
-  <%=link_to "Create Unit", new_unit_path, class: "waves-effect waves-light btn-small blue"%>
+  <%if current_user.role == "teacher" || current_user.admin == true%>
+    <%=link_to "Create Unit", new_unit_path, class: "waves-effect waves-light btn-small blue"%>
+  <%end%>
 </p>
 
 <h2 align = "center">UNITS</h2>
