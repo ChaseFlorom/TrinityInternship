@@ -36,7 +36,7 @@ class UnitsController < ApplicationController
     private
     
     def unit_params
-        params.require(:unit).permit(:name)
+        params.require(:unit).permit(:name, :description)
     end
     
     def require_teacher

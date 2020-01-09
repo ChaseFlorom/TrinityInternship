@@ -1,3 +1,6 @@
+<%= render 'shared/errors', obj: @assignment %>
+
+
 <%= form_for(@assignment, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
     <div class="form-group">
         <div class = "xtrapadding">
@@ -5,14 +8,12 @@
             <%= f.collection_select(:unit_ids, Unit.all, :id, :name, {placeholder: "Units"}, {multiple: true} )%>
             
         </div>
-        
-
-
         <div>
               <%= f.text_field :name, class:"form-control", placeholder: "Title of Assignment", autofocus: true %> 
         </div>
-        <div>
-              <%= f.text_area :description, class:"form-control materialize-textarea", placeholder: "Assignment Description", autofocus: true %> 
+        <div class="field">
+            <b><%= f.label :description %></b>
+            <%= f.rich_text_area :description %>
         </div>
         <div>
             <%= f.text_field :duedate, class: "datepicker", placeholder: "Due Date"%>

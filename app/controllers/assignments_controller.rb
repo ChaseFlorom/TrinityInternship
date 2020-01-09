@@ -11,7 +11,9 @@ class AssignmentsController < ApplicationController
     
     def create
         @assignment = Assignment.new(assignment_params)
-        @assignment.duedate = @assignment.duedate.change({ hour: 23, min: 59, sec: 59 })
+        if @assignment.duedate
+            @assignment.duedate = @assignment.duedate.change({ hour: 23, min: 59, sec: 59 })
+        end
         if @assignment.save
             flash[:success] = "The unit was successfully submitted."
             redirect_to unit_path(@assignment.units.ids)

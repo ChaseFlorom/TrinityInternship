@@ -1,3 +1,6 @@
+<%= render 'shared/errors', obj: @unit %>
+
+
 <%= form_for(@unit, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
     <div class="form-group">
         <div class="control-label col-sm-2">
@@ -5,6 +8,10 @@
         </div>
         <div>
               <%= f.text_field :name, class:"form-control", placeholder: "Title of Unit", autofocus: true %> 
+        </div>
+        <div class="field">
+            <b><%= f.label :description %></b>
+            <%= f.rich_text_area :description %>
         </div>
         <div class="form-group" id="submitbutton">
             <div align = "center">

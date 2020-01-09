@@ -16,8 +16,7 @@
             </div>
             <div class="card-content">
                 <span class="card-title black-text"><%=link_to unit.name, unit_path(unit.id)%></span>
-                <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
+                <p><%=unit.description%></p>
             </div>
             <div class="card-action">
               <%=link_to "Open Class", unit_path(unit.id)%>

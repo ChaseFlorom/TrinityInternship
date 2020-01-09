@@ -1,7 +1,7 @@
 
 
 <%if user_signed_in?%>
-    <h1>Welcome <%=current_user.firstname if current_user.firstname%></h1>
+    <h1>Welcome, <%=current_user.firstname if current_user.firstname%></h1>
     <p>Welcome Page</p>
 <%else%>
     <div class="card-image">
