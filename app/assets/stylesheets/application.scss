@@ -16,7 +16,9 @@
  *= require_self
  */
 
-
+.li {
+    list-style-type: circle !important
+}
 
 .containlite {
     margin-left: 10px;

@@ -2,23 +2,49 @@
 <h2 align = "center"><%=@assignment.name%></h2>
 <p><%=@assignment.description%></p>
 
-<%if @submissions.size >0%>
-    <% @submissions.each do |submission| %>
-        <div class="row">
-            <div class="col s12 m12">
-              <div class="card fill-width">
-                <div class="card-content">
-                  <span class="card-title"><%=submission.user.firstname%></span>
-                  <p><%=submission.content%></p>
+
+<%if current_user.role == "teacher"%>
+  <%if @submissions.size >0%>
+      <% @submissions.each do |submission| %>
+          <div class="row">
+              <div class="col s12 m12">
+                <div class="card fill-width">
+                  <div class="card-content">
+                    <span class="card-title"><%=submission.user.firstname%></span>
+                    <p><%=submission.content%></p>
+                  </div>
+                  <div class="card-action">
+                    <%=link_to "Delete Submission", submission_path(submission.id), method: :delete, data: {confirm: "Are you sure you want to delete this submission?"}, class: 'red-text'%>
+                  </div>
                 </div>
-                <div class="card-action">
-                  <%=link_to "Delete Submission", submission_path(submission.id), method: :delete, data: {confirm: "Are you sure you want to delete this submission?"}, class: 'red-text'%>
-                </div>
-                
+              </div>
+          </div>
+      <%end%>
+  <%else%>
+    <div class = "top-padding" align = "center">
+          <i class="large material-icons icon-light-gray">wb_sunny</i>
+          <h3 class = 'blue-grey-text text-lighten-4'>No assignments turned in yet!</h3>
+    </div>  
+  <%end%>
+    
+<%else%>
+  <%if @submissions.where(user_id: current_user.id).size > 0%>
+    <% @submissions.where(user_id: current_user.id).each do |submission| %>
+      <div class="row">
+          <div class="col s12 m12">
+            <div class="card fill-width">
+              <div class="card-content">
+                <span class="card-title"><%=submission.user.firstname%></span>
+                <p><%=submission.content%></p>
+              </div>
+              <div class="card-action">
+                <%=link_to "Delete Submission", submission_path(submission.id), method: :delete, data: {confirm: "Are you sure you want to delete this submission?"}, class: 'red-text'%>
               </div>
             </div>
-        </div>
-    <%end%>
-<%else%>
+          </div>
+      </div>
+    <%end%>      
+  <%else%>
     <%= render 'submissions/form'%> 
+  <%end%>
 <%end%>
