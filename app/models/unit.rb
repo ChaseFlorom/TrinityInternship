@@ -5,5 +5,5 @@ class Unit < ApplicationRecord
     accepts_nested_attributes_for :assignments
     
     validates :name, presence: true
-    validates :description, presence: true
+    #validates :description, presence: true
 end

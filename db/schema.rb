@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_09_213231) do
+ActiveRecord::Schema.define(version: 2020_01_13_220641) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_01_09_213231) do
     t.datetime "duedate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "assignment_type"
   end
 
   create_table "assignments_units", id: false, force: :cascade do |t|
