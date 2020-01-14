@@ -6,6 +6,7 @@ class AssignmentsController < ApplicationController
           if params[:unit_ids]
               puts "fired"
             @assignment.unit_ids = params[:unit_ids]
+            @assignment.name = params[:name]
           end
     end
     

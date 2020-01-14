@@ -7,6 +7,8 @@ class Assignment < ApplicationRecord
       accepts_nested_attributes_for :units
       
       validates :duedate, presence: true
+      validates :assignment_type, presence: true
+      validates :units, presence: true
       
     def self.options 
         TYPES.map {|type| [type.capitalize, type]}

@@ -10,7 +10,11 @@
   <ul class="collapsible">
     <% @assignments.each do |assignment| %>
       <li>
-        <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%></div>
+        <%if assignment.assignment_type == "Question"%>
+          <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%></div>
+        <%else%>
+          <div class="collapsible-header"><i class="material-icons">check_circle</i><%=assignment.name%></div>
+        <%end%>
         <div class="collapsible-body">
           <h4><%=link_to assignment.name, assignment_path(assignment.id)%></h4>
           <p class = "lime-text text-darken-2">Due <%=assignment.duedate.to_formatted_s(:month_and_year)%></p>
