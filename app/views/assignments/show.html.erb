@@ -2,7 +2,13 @@
 <h2 align = "center"><%=@assignment.name%></h2>
 <h4 align = "center">Due: <%=@assignment.duedate.to_formatted_s(:month_and_year)%></h2>
 <p><%=@assignment.description%></p>
-
+<%if @assignment.assignment_type == 'Video'%>
+  <div class = "videocontainer">
+    <%@video =  YouTubeRails.extract_video_id("#{@assignment.link}")%>
+    <iframe class = 'assignment_video' src='https://www.youtube.com/embed/<%= @video %>?rel=0&autoplay=<%= params[:autoplay] || 0 %>' frameborder='0' allowfullscreen>    
+  </div>
+</iframe>
+<%end%>
 
 <%if current_user.role == "teacher"%>
   <%if @submissions.size >0%>

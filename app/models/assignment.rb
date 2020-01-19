@@ -1,5 +1,5 @@
 class Assignment < ApplicationRecord
-      TYPES = ["Question","Mark as Finished"]
+      TYPES = ["Question","Mark as Finished","Video"]
       has_rich_text :description
       has_many :submissions
       has_and_belongs_to_many :units

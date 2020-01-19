@@ -44,5 +44,16 @@ document.addEventListener("turbolinks:load", function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
   });
+  
+  
+//Add link when choosing video type.
+document.addEventListener("turbolinks:load", function() {
+    $("#assignment_type").on('change', function(){
+      alert("hey")
+    })
+
+});
+
+  
 require("trix")
 require("@rails/actiontext")

@@ -1,5 +1,7 @@
 class AssignmentsController < ApplicationController
     before_action :require_teacher, except: [:show, :index]
+    protect_from_forgery except: :new
+
 
     def new
           @assignment =  Assignment.new
@@ -8,6 +10,7 @@ class AssignmentsController < ApplicationController
             @assignment.unit_ids = params[:unit_ids]
             @assignment.name = params[:name]
           end
+
     end
     
     def create
@@ -40,7 +43,7 @@ class AssignmentsController < ApplicationController
     private
     
     def assignment_params
-        params.require(:assignment).permit(:name, :description, :assignment_type, :duedate, unit_ids: [])
+        params.require(:assignment).permit(:name, :description, :link, :assignment_type, :duedate, unit_ids: [])
     end
     
     def require_teacher

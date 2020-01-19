@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 gem 'devise'
 gem 'materialize-sass'
+gem 'youtube_rails'
 gem 'jquery-rails'
 gem 'image_processing', '~> 1.2'
 gem 'will_paginate-materialize', git: 'https://github.com/mldoscar/will_paginate-materialize', branch: 'master'
