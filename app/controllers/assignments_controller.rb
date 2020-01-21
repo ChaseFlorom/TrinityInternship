@@ -43,7 +43,7 @@ class AssignmentsController < ApplicationController
     private
     
     def assignment_params
-        params.require(:assignment).permit(:name, :description, :link, :assignment_type, :duedate, unit_ids: [])
+        params.require(:assignment).permit(:name, :totalpoints, :description, :link, :assignment_type, :duedate, unit_ids: [])
     end
     
     def require_teacher

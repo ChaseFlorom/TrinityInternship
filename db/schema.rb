@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_14_204255) do
+ActiveRecord::Schema.define(version: 2020_01_21_223607) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2020_01_14_204255) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "assignment_type"
     t.string "link"
+    t.integer "totalpoints", default: 0
   end
 
   create_table "assignments_units", id: false, force: :cascade do |t|
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_01_14_204255) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "content"
     t.boolean "ontime"
+    t.integer "points"
   end
 
   create_table "units", force: :cascade do |t|
