@@ -7,9 +7,18 @@
               <i class="material-icons circle">account_circle</i>
               <b><%="#{obj.user.firstname} #{obj.user.lastname}" %> </b>
               <span class = "grey-text"><small>Submitted <%=obj.created_at.to_formatted_s(:month_and_year)%></small></span>
+              <!-- If Object Late -->
               <%if !obj.ontime%>
                 <div class="chip yellow lighten-2">
                   <p align = "center"><b>Late</b></p>
+                </div>
+              <%end%>
+              
+              <!-- If Object Graded -->
+              <%if obj.points != nil%>
+                <div class="chip blue lighten-2">
+                  <% @grade_percentile = (Float(obj.points) /Float(obj.assignment.totalpoints)) * 100 %>
+                  <p align = "center"><b><%= @grade_percentile.truncate(2) %>%</b></p>
                 </div>
               <%end%>
             </div>
@@ -20,7 +29,11 @@
               <span class = "grey-text">
                 <%if obj.assignment%>
                   <%if obj.assignment.totalpoints != 0%>
-                    <input placeholder="points" id="points" type="number" class="shortnumber">/<%=obj.assignment.totalpoints%>
+                    <%= form_for(obj, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
+                      <div class = "form-padding">
+                        <%= f.text_field :points,  id: 'points', type: "number", class:"form-control", placeholder: "points" %>/<%=obj.assignment.totalpoints%>
+                      </div>
+                    <%end%>
                   <%end%>
                 <%end%>
               </span>

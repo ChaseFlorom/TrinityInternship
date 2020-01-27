@@ -2,7 +2,22 @@
 
 <%if user_signed_in?%>
     <h1>Welcome, <%=current_user.firstname if current_user.firstname%></h1>
-    <p>Welcome Page</p>
+            <%@submissions = Submission.joins(:assignment).where.not(assignments: { totalpoints: 0 }).where(submissions: {points: nil})%>
+            <%if @submissions.size > 0%>
+            <h4 align = "center">Submissions To Grade</h4>
+              <ul class="collapsible ">
+                <% @submissions.each do |submission| %>
+                  <li class = "grey lighten-2">
+                      <%if submission.assignment%>
+                          <div class="collapsible-header"><i class="material-icons">assignment</i><%=submission.assignment.name%> // <%=submission.user.firstname%></div>
+                          <div class="collapsible-body"><%= render 'submissions/card', obj: submission %></div>
+                      <%end%>
+                  </li>
+                <%end%>
+              </ul>
+            <%else%>
+
+            <%end%>
 <%else%>
     <div class="card-image">
         <%= image_tag "learning.png", class: "responsive-img" %>

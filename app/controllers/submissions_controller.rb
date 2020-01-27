@@ -16,6 +16,17 @@ class SubmissionsController < ApplicationController
         end
     end
     
+    def update
+         @submission = Submission.find(params[:id])
+        if @submission.update(submission_params)
+            flash.now[:success] = "The Grade has Successfully been Saved."
+            redirect_back(fallback_location: root_path)
+        else
+            flash.now[:danger] = "That didn't work, try again later."
+            redirect_back(fallback_location: root_path)
+        end        
+    end
+    
     def show
         @show = Submission.find(params[:id])
     end
