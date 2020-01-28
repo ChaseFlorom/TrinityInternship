@@ -3,11 +3,13 @@
 
 <%= form_for(@unit, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
     <div class="form-group">
-        <div class="control-label col-sm-2">
-            <%= f.label :name %>
-        </div>
         <div>
-              <%= f.text_field :name, class:"form-control", placeholder: "Title of Unit", autofocus: true %> 
+            <%=f.label "Unit Name"%>
+            <%= f.text_field :name, class:"form-control", placeholder: "Title of Unit", autofocus: true %> 
+        </div>
+        <div class = "xtrapadding">
+            <%=f.label "Select Intern(s)"%>
+            <%= f.collection_select(:user_ids, User.all, :id, (:firstname + :lastname) , {placeholder: "Intern(s)"}, {multiple: true} )%>
         </div>
         <div class="field">
             <b><%= f.label :description %></b>
