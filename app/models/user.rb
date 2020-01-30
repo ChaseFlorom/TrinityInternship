@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   has_many :submissions
   has_and_belongs_to_many :units
   has_many :assignments, :through => :units
@@ -7,4 +8,20 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  
+    def fullname
+      if(firstname && lastname) 
+        firstname + " " + lastname
+      else
+        "[Intern doesn't have a set first and last name]"
+      end
+    end
+    def self.fullname
+      if(firstname && lastname) 
+        firstname + " " + lastname
+      else
+        "[Intern doesn't have a set first and last name]"
+      end
+    end
 end

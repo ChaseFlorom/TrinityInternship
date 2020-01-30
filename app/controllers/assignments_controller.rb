@@ -8,9 +8,7 @@ class AssignmentsController < ApplicationController
           if params[:unit_ids]
               puts "fired"
             @assignment.unit_ids = params[:unit_ids]
-            @assignment.name = params[:name]
           end
-
     end
     
     def create
@@ -26,6 +24,10 @@ class AssignmentsController < ApplicationController
         end        
     end
     
+    def edit
+        @assignment = Assignment.find(params[:id])
+    end
+    
     def show
         @assignment = Assignment.find(params[:id])
         @submission = Submission.new
@@ -38,6 +40,16 @@ class AssignmentsController < ApplicationController
         flash[:danger] = "You have deleted that assignment."
         redirect_back(fallback_location: root_path)
                 
+    end
+    
+    def update
+        @assignment = Assignment.find(params[:id])
+        if @assignment.update(assignment_params)
+            flash[:success] = "The assignment was successfully updated."
+            redirect_to assignment_path(@assignment)
+        else
+            render 'edit'
+        end  
     end
     
     private

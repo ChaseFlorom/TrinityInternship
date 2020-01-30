@@ -1,7 +1,7 @@
 
 
 <%if user_signed_in?%>
-    <h1>Welcome, <%=current_user.firstname if current_user.firstname%></h1>
+    <h1>Welcome, <%=current_user.fullname if current_user.firstname%></h1>
             <%@submissions = Submission.joins(:assignment).where.not(assignments: { totalpoints: 0 }).where(submissions: {points: nil})%>
             <%if @submissions.size > 0%>
             <h4 align = "center">Submissions To Grade</h4>

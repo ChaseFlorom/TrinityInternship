@@ -33,6 +33,21 @@ class UnitsController < ApplicationController
         redirect_to units_path
     end
     
+    
+    def edit
+        @unit = Unit.find(params[:id])
+    end
+    
+    def update
+        @unit = Unit.find(params[:id])
+        if @unit.update(unit_params)
+            flash[:success] = "The unit was successfully updated."
+            redirect_to unit_path(@unit)
+        else
+            render 'edit'
+        end        
+    end
+    
     private
     
     def unit_params

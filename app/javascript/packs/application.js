@@ -54,6 +54,13 @@ document.addEventListener("turbolinks:load", function() {
 
 });
 
+//Dropdown for Units
+document.addEventListener("turbolinks:load", function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, {constrainWidth: false});
+  });
+
+
   
 require("trix")
 require("@rails/actiontext")

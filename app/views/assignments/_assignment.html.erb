@@ -1,0 +1,53 @@
+<%= render 'shared/errors', obj: @assignment %>
+
+
+<%= form_for(@assignment, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
+    <div class="form-group">
+        <div class = "xtrapadding">
+            <%=f.label "Select Unit(s) for Assignment"%>
+            <%= f.collection_select(:unit_ids, Unit.all, :id, :name, {placeholder: "Units"}, {multiple: true} )%>
+            
+        </div>
+        <div class="form-group form-padding">
+            <%= f.label :assignment_type %>
+            <%= f.select(:assignment_type, options_for_select(Assignment.options, params[:type]), {},  { :id => 'assign_type' })%>
+        </div>
+          
+        <script type="text/javascript">
+            $('#assign_type').change(function () {
+                selection = this.value
+                if(selection == 'Video') {
+                    $('#video_link').removeClass('hidden');
+                } else {
+                    $('#video_link').addClass('hidden');
+                }
+            });
+        </script>
+        <div class = "form-padding">
+            <%= f.label "Assignment Name" %>
+            <%= f.text_field :name, class:"form-control", placeholder: "Title of Assignment", autofocus: true %> 
+        </div>
+        <div class = "form-padding">
+              <%= f.text_field :link,  id: 'video_link', class:"form-control hidden", placeholder: "Insert video link" %> 
+        </div>
+        <div class="field form-padding">
+            <%= f.label :description %>
+            <%= f.rich_text_area :description %>
+        </div>
+        <div class = "form-padding">
+            <%= f.label "Due Date" %>
+            <%= f.text_field :duedate, class: "datepicker", placeholder: "Due Date"%>
+        </div>
+        
+        <div class = "form-padding">
+            <%= f.label "If the assignment is graded, put the number of points the assignment is worth, otherwise leave it blank." %>
+            <%= f.text_field :totalpoints,  class:"form-control", placeholder: "Insert points if graded." %> 
+        </div>
+
+        <div class="form-group" id="submitbutton">
+            <div align = "center">
+                <%= f.submit  class: "btn waves-effect waves-light" %>
+            </div>
+        </div>
+    </div>
+<%end%>
