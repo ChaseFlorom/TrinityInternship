@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, :only => [:index, :show]
   get 'interns', to: 'users#index'
+  get 'grades', to: 'grades#index'
   resources :units
   resources :assignments 
   resources :submissions

@@ -1,0 +1,20 @@
+<h2>Gradebook</h2>
+<table class="responsive-table highlight">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Grade</th>
+        <th>X</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    
+      <tr>
+        <td><%=link_to user.fullname, user_path(user.id)%></td>
+        <td>Eclair</td>
+        <td>$0.87</td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
