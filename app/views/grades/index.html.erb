@@ -1,20 +1,22 @@
 <h2>Gradebook</h2>
+<p>Only Interns with assignments will show up in the gradebook.</p>
 <table class="responsive-table highlight">
   <thead>
     <tr>
         <th>Name</th>
-        <th>Grade</th>
-        <th>X</th>
+        <th># of Assignments</th>
+        <th>Total Average %</th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
-    
-      <tr>
-        <td><%=link_to user.fullname, user_path(user.id)%></td>
-        <td>Eclair</td>
-        <td>$0.87</td>
-      </tr>
+      <% if user.assignments.size > 0 %>
+        <tr>
+          <td><%=link_to user.fullname, user_path(user.id)%></td>
+          <td><%=user.assignments.size%></td>
+          <td>N/A</td>
+        </tr>
+      <%end%>
     <%end%>
   </tbody>
 </table>
