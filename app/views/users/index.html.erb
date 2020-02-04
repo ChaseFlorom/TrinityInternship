@@ -5,7 +5,7 @@
     <% @users.each do |user| %>
         <li class="collection-item avatar">
           <i class="material-icons circle">account_circle</i>
-          <span class="title"><%= user.firstname && user.lastname ? (link_to user.firstname + " " + user.lastname, interns_path) : (link_to('Anonymous', interns_path))%></span>
+          <span class="title"><%=link_to user.fullname, user_path(user.id)%></span>
           <p>First Line <br>
              Second Line
           </p>

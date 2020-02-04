@@ -2,22 +2,67 @@
 
 <%if user_signed_in?%>
     <h1>Welcome, <%=current_user.fullname if current_user.firstname%></h1>
-            <%@submissions = Submission.joins(:assignment).where.not(assignments: { totalpoints: 0 }).where(submissions: {points: nil})%>
-            <%if @submissions.size > 0%>
-            <h4 align = "center">Submissions To Grade</h4>
-              <ul class="collapsible ">
-                <% @submissions.each do |submission| %>
-                  <li class = "grey lighten-2">
-                      <%if submission.assignment%>
-                          <div class="collapsible-header"><i class="material-icons">assignment</i><%=submission.assignment.name%> // <%=submission.user.firstname%></div>
-                          <div class="collapsible-body"><%= render 'submissions/card', obj: submission %></div>
-                      <%end%>
-                  </li>
-                <%end%>
-              </ul>
-            <%else%>
-
+      <%if current_user.role == "teacher" || current_user.role == "admin"%> 
+        <%@submissions = Submission.joins(:assignment).where.not(assignments: { totalpoints: 0 }).where(submissions: {points: nil})%>
+        <%if @submissions.size > 0%>
+        <h4 align = "center">Submissions To Grade</h4>
+          <ul class="collapsible ">
+            <% @submissions.each do |submission| %>
+              <li class = "grey lighten-2">
+                  <%if submission.assignment%>
+                      <div class="collapsible-header"><i class="material-icons">assignment</i><%=submission.assignment.name%> // <%=submission.user.firstname%></div>
+                      <div class="collapsible-body"><%= render 'submissions/card', obj: submission %></div>
+                  <%end%>
+              </li>
             <%end%>
+          </ul>
+        <%else%>
+        
+        <%end%>
+        
+      <%else%>
+        <%@user_assignments = current_user.assignments%>
+        <%if @user_assignments.size > 0%>
+          <% @user_todo_assignments = [] %>
+          <% @user_assignments.each do |assignment| %>
+            <%@submission = assignment.submissions.where(user_id: current_user.id).last%>
+            <%if @submission%>
+
+            <%else%>
+              <%@user_todo_assignments << assignment %>
+            <%end%>
+          <%end%>
+        <%end%>
+          <%if @user_todo_assignments.size > 0%>
+            <h4 align = "Center">Upcoming Assignments</h4>
+            <ul class="collapsible ">
+
+            <% @user_todo_assignments.each do |assignment| %>
+                <li>
+                  <%if assignment.assignment_type == "Question"%>
+                    <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%> // <%=assignment.units.last.name%></div>
+                  <%elsif assignment.assignment_type == "Video"%>
+                    <div class="collapsible-header"><i class="material-icons">videocam</i><%=assignment.name%></div>
+                  <%else%>
+                    <div class="collapsible-header"><i class="material-icons">check_circle</i><%=assignment.name%></div>
+                  <%end%>
+                  <div class="collapsible-body">
+                    <h4><%=link_to assignment.name, assignment_path(assignment.id)%></h4>
+                    <p class = "lime-text text-darken-2">Due <%=assignment.duedate.to_formatted_s(:month_and_year)%></p>
+                    <span><%=assignment.description%></span>
+                    <hr>
+                    <%=link_to "Delete Assignment", assignment_path(assignment.id), method: :delete, data: {confirm: "Are you sure you want to delete this assignment?"}, class: 'red-text'%>
+                  </div>
+                </li>
+            <%end%>
+            </ul> 
+          <%else%>
+            <div class = "top-padding" align = "center">
+                  <i class="large material-icons icon-light-gray">wb_sunny</i>
+                  <h3 class = 'blue-grey-text text-lighten-4'>No Assignments!</h3>
+            </div>
+          <%end%>
+      <%end%>
 <%else%>
     <div class="card-image">
         <%= image_tag "learning.png", class: "responsive-img" %>

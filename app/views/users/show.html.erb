@@ -62,7 +62,7 @@
               <td><p class = "grey-text text-lighten-2">N/A</p></td>
             <%end%>          
           <%else%>
-            <td><p class = "red-text">Missing</p></td>
+            <td><p class = "red-text"><b>Missing </b>(Due <%=assignment.duedate.to_formatted_s(:month_and_year)%>) </p></td>
             <td><p class = "grey-text text-lighten-2">N/A</p></td>
             <td><p class = "grey-text text-lighten-2">N/A</p></td>
           <%end%>
