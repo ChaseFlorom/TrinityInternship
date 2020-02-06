@@ -31,7 +31,7 @@
                   <%if obj.assignment.totalpoints != 0%>
                     <%= form_for(obj, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
                       <div class = "form-padding">
-                        <%= f.text_field :points,  id: 'points', type: "number", class:"form-control", placeholder: "points" %>/<%=obj.assignment.totalpoints%>
+                        <%= f.text_field :points,  id: 'points', type: "number", class:"form-control", placeholder: "X" %>/<%=obj.assignment.totalpoints%>
                       </div>
                     <%end%>
                   <%end%>
