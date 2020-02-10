@@ -10,7 +10,18 @@
                 <span class="card-title"><h4 align = "center">Announcements</h4></span>
                 <div class="card-content black-text">
                   <div class="row">
-                    
+                    <%= render 'shared/errors', obj: @announcement %>
+                    <%= form_for(@announcement, :html => {class: "form-horizontal", role: "form"}) do  |form| %>
+                        <div class="field bullet">
+                          <%= form.label "Announcement" %>
+                          <%= form.rich_text_area :content %>
+                        </div>
+                        <div class="form-group" id="submitbutton">
+                          <div align = "center">
+                              <%= form.submit "Submit Assignment",  class: "btn waves-effect waves-light" %>
+                          </div>
+                        </div>
+                    <% end %>
                   </div>
                 </div>
               </div>

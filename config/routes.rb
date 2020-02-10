@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :units
   resources :assignments 
   resources :submissions
+  resources :announcements
+
   
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
