@@ -2,7 +2,7 @@ class AnnouncementsController < ApplicationController
     protect_from_forgery except: :new
 
   def index
-    
+    @announcements = Announcement.all
   end
   
   def new
@@ -24,7 +24,10 @@ class AnnouncementsController < ApplicationController
   end
   
   def destroy
-    
+    @announcement = Announcement.find(params[:id])
+    @announcement.destroy
+    flash[:danger] = "You have deleted that announcement."
+    redirect_to announcements_path    
   end
   
     
