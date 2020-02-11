@@ -109,28 +109,37 @@
           <%end%>
         <%end%>
           <div class = "row">
-            <%if @user_todo_assignments.size > 0%>
-              <h4 align = "Center">Upcoming Assignments</h4>
-              <ul class="collapsible ">
-              <% @user_todo_assignments.each do |assignment| %>
-                <li>
-                  <%if assignment.assignment_type == "Question"%>
-                    <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%> // <%=assignment.units.last.name%></div>
-                  <%elsif assignment.assignment_type == "Video"%>
-                    <div class="collapsible-header"><i class="material-icons">videocam</i><%=assignment.name%></div>
-                  <%else%>
-                    <div class="collapsible-header"><i class="material-icons">check_circle</i><%=assignment.name%></div>
+            <%if @user_todo_assignments%>
+              <%if @user_todo_assignments.size > 0%>
+                <h4 align = "Center">Upcoming Assignments</h4>
+                <ul class="collapsible ">
+                  <% @user_todo_assignments.each do |assignment| %>
+                    <li>
+                      <%if assignment.assignment_type == "Question"%>
+                        <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%> // <%=assignment.units.last.name%></div>
+                      <%elsif assignment.assignment_type == "Video"%>
+                        <div class="collapsible-header"><i class="material-icons">videocam</i><%=assignment.name%></div>
+                      <%else%>
+                        <div class="collapsible-header"><i class="material-icons">check_circle</i><%=assignment.name%></div>
+                      <%end%>
+                      <div class="collapsible-body">
+                        <h4><%=link_to assignment.name, assignment_path(assignment.id)%></h4>
+                        <p class = "lime-text text-darken-2">Due <%=assignment.duedate.to_formatted_s(:month_and_year)%></p>
+                        <span><%=assignment.description%></span>
+                        <hr>
+                        <%=link_to "Delete Assignment", assignment_path(assignment.id), method: :delete, data: {confirm: "Are you sure you want to delete this assignment?"}, class: 'red-text'%>
+                      </div>
+                    </li>
                   <%end%>
-                  <div class="collapsible-body">
-                    <h4><%=link_to assignment.name, assignment_path(assignment.id)%></h4>
-                    <p class = "lime-text text-darken-2">Due <%=assignment.duedate.to_formatted_s(:month_and_year)%></p>
-                    <span><%=assignment.description%></span>
-                    <hr>
-                    <%=link_to "Delete Assignment", assignment_path(assignment.id), method: :delete, data: {confirm: "Are you sure you want to delete this assignment?"}, class: 'red-text'%>
+                </ul> 
+              <%else%>
+                <div class = "col s12 m12">
+                  <div class = "top-padding xtramargintop xtrapadding" align = "center">
+                        <i class="large material-icons icon-light-gray">wb_sunny</i>
+                        <h3 class = 'blue-grey-text text-lighten-4'>No Assignments!</h3>
                   </div>
-                </li>
+                </div>
               <%end%>
-              </ul> 
             <%else%>
               <div class = "col s12 m12">
                 <div class = "top-padding xtramargintop xtrapadding" align = "center">
