@@ -5,31 +5,49 @@
       <%if current_user.role == "teacher" || current_user.role == "admin"%> 
         <!-- ANNOUNCEMENTS-->
         <div class="row">
-            <div class="col s12 m10 offset-m1">
-              <div class="card fill-width">
-                <span class="card-title"><h4 align = "center">Announcements</h4></span>
-                <div class="card-content black-text">
-                  <div class="row">
-                    <div id = "announcement form">
-                      <%= render 'shared/errors', obj: @announcement %>
-                      <%= form_for(@announcement, :html => {class: "form-horizontal", role: "form"}) do  |form| %>
-                          <div class="field bullet">
-                            <%= form.label "Announcement" %>
-                            <%= form.rich_text_area :content %>
-                          </div>
-                          <div class="form-group" id="submitbutton">
-                            <div align = "center">
-                                <%= form.submit "Submit Assignment",  class: "btn waves-effect waves-light xtramargintop" %>
-                            </div>
-                          </div>
-                      <% end %>                      
-                    </div>
-
+          <div class="col s12 m10 offset-m1">
+            <div class="card fill-width">
+              <span class="card-title"><h4 align = "center">Announcements</h4></span>
+              <div class="card-content black-text">
+                <div class="row">
+                  <div id = "announcement form" class>
+                    <%= render 'shared/errors', obj: @announcement %>
+                    <%= form_for(@announcement, :html => {class: "form-horizontal", role: "form"}) do  |form| %>
+                      <div class="field bullet">
+                        <%= form.label "Announcement" %>
+                        <%= form.rich_text_area :content %>
+                      </div>
+                      <div class="form-group" id="submitbutton">
+                        <div align = "center">
+                            <%= form.submit "Submit Assignment",  class: "btn waves-effect waves-light xtramargintop" %>
+                        </div>
+                      </div>
+                    <% end %>                      
+                  </div>
+                  <div id = "featured announcement">
+                    <%if @announcements.size > 0%>
+                      <%@fannouncement = @announcements.last%>
+                      <%@a_user = @fannouncement.user%>
+                      <span>
+                        <h5><i class="material-icons circle">account_circle</i><%=link_to @a_user.fullname, user_path(@a_user.id)%></h5>  
+                        <p class = "grey-text lighten-3"> posted on <%=@fannouncement.created_at.to_formatted_s(:month_and_year)%></p>
+                      <span>
+                      <hr>
+                      <row>
+                        <p><%=@fannouncement.content%></p>                   
+                      </row>
+                    <%end%>
                   </div>
                 </div>
+
+              </div>
+              <div class="card-action">
+                <%=link_to "View All Announcements", announcements_path(), class: 'blue-text'%>
               </div>
             </div>
-          </div>       
+          </div>
+        </div>
+
         <!-- SUBMISSIONS-->
         <%@submissions = Submission.joins(:assignment).where.not(assignments: { totalpoints: 0 }).where(submissions: {points: nil})%>
         <%if @submissions.size > 0%>
