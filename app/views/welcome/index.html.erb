@@ -1,163 +1,160 @@
-
-
 <%if user_signed_in?%>
-    <h1>Welcome, <%=current_user.fullname if current_user.firstname%></h1>
-      <%if current_user.role == "teacher" || current_user.role == "admin"%> 
-        <!-- ANNOUNCEMENTS-->
-        <div class="row">
-          <div class="col s12 m10 offset-m1">
-            <div class="card fill-width">
-              <span class="card-title"><h4 align = "center">New Announcement</h4></span>
-              <div class="card-content black-text">
-                <div class="row">
-                  <div id = "announcement form" class>
-                    <%= render 'shared/errors', obj: @announcement %>
-                    <%= form_for(@announcement, :html => {class: "form-horizontal", role: "form"}) do  |form| %>
-                      <div class="field bullet">
-                        <%= form.label "Announcement" %>
-                        <%= form.rich_text_area :content %>
-                      </div>
-                      <div class="form-group" id="submitbutton">
-                        <div align = "center">
-                            <%= form.submit "Submit Assignment",  class: "btn waves-effect waves-light xtramargintop" %>
-                        </div>
-                      </div>
-                    <% end %>                      
+  <h1>Welcome, <%=current_user.fullname if current_user.firstname%></h1>
+  <%if current_user.role == "teacher" || current_user.role == "admin"%> 
+    <!-- ANNOUNCEMENTS-->
+    <div class="row">
+      <div class="col s12 m10 offset-m1">
+        <div class="card fill-width">
+          <span class="card-title"><h4 align = "center">New Announcement</h4></span>
+          <div class="card-content black-text">
+            <div class="row">
+              <div id = "announcement form" class>
+                <%= render 'shared/errors', obj: @announcement %>
+                <%= form_for(@announcement, :html => {class: "form-horizontal", role: "form"}) do  |form| %>
+                  <div class="field bullet">
+                    <%= form.label "Announcement" %>
+                    <%= form.rich_text_area :content %>
                   </div>
-                </div>
+                  <div class="form-group" id="submitbutton">
+                    <div align = "center">
+                      <%= form.submit "Submit Assignment",  class: "btn waves-effect waves-light xtramargintop" %>
+                    </div>
+                  </div>
+                <% end %>                      
               </div>
             </div>
           </div>
         </div>
-      <%end%>
-        <!--Featured Announcement-->
-        <%if @announcements.size > 0%>
-          <div class="row">
-            <div class="col s12 m10 offset-m1">
-              <div class="card fill-width blue lighten-5">
-                <span class="card-title"><h4 align = "center">Featured Announcement</h4></span>
-                <div class="card-content black-text">
-                  <div class="row">
-                    <div id = "featured announcement">
-                        <%@fannouncement = @announcements.last%>
-                        <%@a_user = @fannouncement.user%>
-                        <span>
-                          <h5><i class="material-icons circle">account_circle</i><%=link_to @a_user.fullname, user_path(@a_user.id)%></h5>  
-                          <p class = "grey-text lighten-3"> posted on <%=@fannouncement.created_at.to_formatted_s(:month_and_year)%></p>
-                        <span>
-                        <hr>
-                        <row>
-                          <p><%=@fannouncement.content%></p>                   
-                        </row>
-                    </div>
+      </div>
+    </div>
+  <%end%>
+  <!--Featured Announcement-->
+  <%if @announcements.size > 0%>
+    <div class="row">
+      <div class="col s12 m10 offset-m1">
+        <div class="card fill-width blue lighten-5">
+          <span class="card-title"><h4 align = "center">Featured Announcement</h4></span>
+          <div class="card-content black-text">
+            <div class="row">
+              <div id = "featured announcement">
+                  <%@fannouncement = @announcements.last%>
+                  <%@a_user = @fannouncement.user%>
+                  <span>
+                    <h5><i class="material-icons circle">account_circle</i><%=link_to @a_user.fullname, user_path(@a_user.id)%></h5>  
+                    <p class = "grey-text lighten-3"> posted on <%=@fannouncement.created_at.to_formatted_s(:month_and_year)%></p>
+                  </span>
+                  <hr>
+                  <div class = "row">
+                    <p><%=@fannouncement.content%></p>                   
                   </div>
-                </div>
-              <div class="card-action">
-                <%=link_to "View All Announcements", announcements_path(), class: 'blue-text'%>
               </div>
             </div>
           </div>
-        <%end%>
-      <%if current_user.role == "teacher" || current_user.role == "admin"%> 
-        <!-- SUBMISSIONS-->
-        <row>
-        <%@submissions = Submission.joins(:assignment).where.not(assignments: { totalpoints: 0 }).where(submissions: {points: nil})%>
-        <%if @submissions.size > 0%>
-          <div class = "row">
-            <div class="col s12 m10 offset-m1">
-              <div class="card fill-width">
-                <span class="card-title"><h4 align = "center">Submissions to Grade</h4></span>
-                <div class="card-content black-text">
-                  <ul class="collapsible grey lighten-2">
-                    <% @submissions.each do |submission| %>
-                      <li class = "">
-                          <%if submission.assignment%>
-                            <div class="collapsible-header"><i class="material-icons">assignment</i><%=submission.assignment.name%> // <%=submission.user.firstname%></div>
-                            <div class="collapsible-body"><%= render 'submissions/card', obj: submission %></div>                       
-                          <%end%>
-                      </li>
+          <div class="card-action">
+            <%=link_to "View All Announcements", announcements_path(), class: 'blue-text'%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+  <%if current_user.role == "teacher" || current_user.role == "admin"%> 
+    <!-- SUBMISSIONS-->
+    <%@submissions = Submission.joins(:assignment).where.not(assignments: { totalpoints: 0 }).where(submissions: {points: nil})%>
+    <%if @submissions.size > 0%>
+      <div class = "row">
+        <div class="col s12 m10 offset-m1">
+          <div class="card fill-width">
+            <span class="card-title"><h4 align = "center">Submissions to Grade</h4></span>
+            <div class="card-content black-text">
+              <ul class="collapsible grey lighten-2">
+                <% @submissions.each do |submission| %>
+                  <li class = "">
+                    <%if submission.assignment%>
+                      <div class="collapsible-header"><i class="material-icons">assignment</i><%=submission.assignment.name%> // <%=submission.user.firstname%></div>
+                      <div class="collapsible-body"><%= render 'submissions/card', obj: submission %></div>                       
                     <%end%>
-                  </ul>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
+                  </li>
+                <%end%>
+              </ul>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+              <a href="#">This is a link</a>
             </div>
           </div>
-        </row>
+        </div>
+      </div>
+    <%else%>
+      <div class = "row">
+        <div class = "top-padding" align = "center">
+          <i class="large material-icons icon-light-gray">wb_sunny</i>
+          <h3 class = 'blue-grey-text text-lighten-4'>No Assignments!</h3>
+        </div>            
+      </div>
+    <%end%>
+  <%else%>
+    <%@user_assignments = current_user.assignments%>
+    <%if @user_assignments.size > 0%>
+      <%@user_todo_assignments = [] %>
+      <%@user_assignments.each do |assignment| %>
+      <%@submission = assignment.submissions.where(user_id: current_user.id).last%>
+        <%if @submission%>
+  
         <%else%>
-          <div class = "row">
-            <div class = "top-padding" align = "center">
+          <%@user_todo_assignments << assignment %>
+        <%end%>
+      <%end%>
+    <%end%>
+    <div class = "row">
+      <%if @user_todo_assignments%>
+        <%if @user_todo_assignments.size > 0%>
+          <h4 align = "Center">Upcoming Assignments</h4>
+          <ul class="collapsible ">
+            <% @user_todo_assignments.each do |assignment| %>
+              <li>
+                <%if assignment.assignment_type == "Question"%>
+                  <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%> // <%=assignment.units.last.name%></div>
+                <%elsif assignment.assignment_type == "Video"%>
+                  <div class="collapsible-header"><i class="material-icons">videocam</i><%=assignment.name%></div>
+                <%else%>
+                  <div class="collapsible-header"><i class="material-icons">check_circle</i><%=assignment.name%></div>
+                <%end%>
+                <div class="collapsible-body">
+                  <h4><%=link_to assignment.name, assignment_path(assignment.id)%></h4>
+                  <p class = "lime-text text-darken-2">Due <%=assignment.duedate.to_formatted_s(:month_and_year)%></p>
+                  <span><%=assignment.description%></span>
+                  <hr>
+                  <%=link_to "Delete Assignment", assignment_path(assignment.id), method: :delete, data: {confirm: "Are you sure you want to delete this assignment?"}, class: 'red-text'%>
+                </div>
+              </li>
+            <%end%>
+          </ul> 
+        <%else%>
+          <div class = "col s12 m12">
+            <div class = "top-padding xtramargintop xtrapadding" align = "center">
               <i class="large material-icons icon-light-gray">wb_sunny</i>
               <h3 class = 'blue-grey-text text-lighten-4'>No Assignments!</h3>
-            </div>            
+            </div>
           </div>
         <%end%>
       <%else%>
-        <%@user_assignments = current_user.assignments%>
-        <%if @user_assignments.size > 0%>
-          <% @user_todo_assignments = [] %>
-          <% @user_assignments.each do |assignment| %>
-            <%@submission = assignment.submissions.where(user_id: current_user.id).last%>
-            <%if @submission%>
-
-            <%else%>
-              <%@user_todo_assignments << assignment %>
-            <%end%>
-          <%end%>
-        <%end%>
-          <div class = "row">
-            <%if @user_todo_assignments%>
-              <%if @user_todo_assignments.size > 0%>
-                <h4 align = "Center">Upcoming Assignments</h4>
-                <ul class="collapsible ">
-                  <% @user_todo_assignments.each do |assignment| %>
-                    <li>
-                      <%if assignment.assignment_type == "Question"%>
-                        <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%> // <%=assignment.units.last.name%></div>
-                      <%elsif assignment.assignment_type == "Video"%>
-                        <div class="collapsible-header"><i class="material-icons">videocam</i><%=assignment.name%></div>
-                      <%else%>
-                        <div class="collapsible-header"><i class="material-icons">check_circle</i><%=assignment.name%></div>
-                      <%end%>
-                      <div class="collapsible-body">
-                        <h4><%=link_to assignment.name, assignment_path(assignment.id)%></h4>
-                        <p class = "lime-text text-darken-2">Due <%=assignment.duedate.to_formatted_s(:month_and_year)%></p>
-                        <span><%=assignment.description%></span>
-                        <hr>
-                        <%=link_to "Delete Assignment", assignment_path(assignment.id), method: :delete, data: {confirm: "Are you sure you want to delete this assignment?"}, class: 'red-text'%>
-                      </div>
-                    </li>
-                  <%end%>
-                </ul> 
-              <%else%>
-                <div class = "col s12 m12">
-                  <div class = "top-padding xtramargintop xtrapadding" align = "center">
-                        <i class="large material-icons icon-light-gray">wb_sunny</i>
-                        <h3 class = 'blue-grey-text text-lighten-4'>No Assignments!</h3>
-                  </div>
-                </div>
-              <%end%>
-            <%else%>
-              <div class = "col s12 m12">
-                <div class = "top-padding xtramargintop xtrapadding" align = "center">
-                      <i class="large material-icons icon-light-gray">wb_sunny</i>
-                      <h3 class = 'blue-grey-text text-lighten-4'>No Assignments!</h3>
-                </div>
-              </div>
-            <%end%>
+        <div class = "col s12 m12">
+          <div class = "top-padding xtramargintop xtrapadding" align = "center">
+            <i class="large material-icons icon-light-gray">wb_sunny</i>
+            <h3 class = 'blue-grey-text text-lighten-4'>No Assignments!</h3>
           </div>
+        </div>
       <%end%>
+    </div>
+  <%end%>
 <%else%>
-    <div class="card-image">
-        <%= image_tag "learning.png", class: "responsive-img" %>
-    </div>
-    <h1 align = "center">Trinity Internship</h1>
-    <div align = "center">
-       <%= link_to "Sign In", new_user_session_path, class: "waves-effect waves-light btn-large"%> 
-    </div>
+  <div class="card-image">
+    <%= image_tag "learning.png", class: "responsive-img" %>
+  </div>
+  <h1 align = "center">Trinity Internship</h1>
+  <div align = "center">
+    <%= link_to "Sign In", new_user_session_path, class: "waves-effect waves-light btn-large"%> 
+  </div>
 <%end%>
 
 
