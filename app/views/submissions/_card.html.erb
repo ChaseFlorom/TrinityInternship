@@ -13,7 +13,6 @@
                   <p align = "center"><b>Late</b></p>
                 </div>
               <%end%>
-              
               <!-- If Object Graded -->
               <%if obj.points != nil%>
                 <div class="chip blue lighten-2">
@@ -31,7 +30,7 @@
                   <%if obj.assignment.totalpoints != 0%>
                     <%= form_for(obj, :html => {class: "form-horizontal", role: "form"}) do  |f| %>
                       <div class = "form-padding">
-                        <%= f.text_field :points,  id: 'points', type: "number", class:"form-control", placeholder: "X" %>/<%=obj.assignment.totalpoints%>
+                        <%= f.text_field :points,  id: 'points', type: "number", class:"form-control", disabled: !is_teacher?,  placeholder: "X" %>/<%=obj.assignment.totalpoints%>
                       </div>
                     <%end%>
                   <%end%>

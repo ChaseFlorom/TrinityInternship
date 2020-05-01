@@ -5,7 +5,7 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <%if user_signed_in?%>
                     <li><%= link_to('Units', units_path) %></li>
-                    <%if current_user == "teacher"%>
+                    <%if current_user.role == "teacher"%>
                         <li><%= link_to('Grades', grades_path) %></li>  
                         <li><%= link_to('Interns', interns_path) %></li>  
                     <%end%>
