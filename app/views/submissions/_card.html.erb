@@ -39,6 +39,9 @@
             </div>
           </div>           
       </div>
+        <div align = "left">
+          <i class="material-icons icon-comment line-height">mode_comment</i><%=link_to "Leave a comment", class: 'grey-text margin-side'%>
+        </div>
         <div class="card-action">
           <%=link_to "Delete Submission", submission_path(obj.id), method: :delete, data: {confirm: "Are you sure you want to delete this submission?"}, class: 'red-text'%>
         </div>

@@ -1,73 +1,90 @@
 <h2 align = "center"><%=@user.fullname%></h2>
-
-<table class="responsive-table highlight">
-  <thead>
-    <tr>
-        <th>Assignment Name</th>
-        <th>Status</th>
-        <th>Grade</th>
-        <th>Percentage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user_assignments.each do |assignment| %>
-      <tr>
-        <%if assignment%>
-          <td><%=link_to assignment.name, assignment_path(assignment.id)%></td>
-          <%@submission = assignment.submissions.where(user_id: @user.id).last%>
-          <%if @submission%>
-            <%if assignment.totalpoints != 0%>
-              <%if @submission.points != nil%>
-                <td>
-                  <span class = "inline">
-                    <div class = "inline">Graded</div>
-                    <%if !@submission.ontime%>
-                      <div class = "red-text inline"><b>(Late)</b></div>
-                    <%end%>
-                  </span>
-                </td>
-                <td>
-                  <%= form_for(@submission, :html => {class: "short-width", role: "form"}) do  |f| %>
-                    <div class = "">
-                        <%= f.text_field :points,  id: 'points', type: "number", class:"short-width", placeholder: "points" %>/<%=assignment.totalpoints%>
-                    </div>
+<% if @user.role == "teacher"%>
+  <div class = "col s12 m12">
+    <div class = "top-padding xtramargintop xtrapadding" align = "center">
+      <i class="large material-icons icon-light-gray">sentiment_satisfied</i>
+      <h3 class = 'blue-grey-text text-lighten-4'>This is a teacher, nothin' to see here!</h3>
+      </div>
+  </div>
+<%else%>
+  <%if current_user.role == "teacher" || current_user.id == @user.id%>
+    <table class="responsive-table highlight">
+      <thead>
+        <tr>
+            <th>Assignment Name</th>
+            <th>Status</th>
+            <th>Grade</th>
+            <th>Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user_assignments.each do |assignment| %>
+          <tr>
+            <%if assignment%>
+              <td><%=link_to assignment.name, assignment_path(assignment.id)%></td>
+              <%@submission = assignment.submissions.where(user_id: @user.id).last%>
+              <%if @submission%>
+                <%if assignment.totalpoints != 0%>
+                  <%if @submission.points != nil%>
+                    <td>
+                      <span class = "inline">
+                        <div class = "inline">Graded</div>
+                        <%if !@submission.ontime%>
+                          <div class = "red-text inline"><b>(Late)</b></div>
+                        <%end%>
+                      </span>
+                    </td>
+                    <td>
+                      <%= form_for(@submission, :html => {class: "short-width", role: "form"}) do  |f| %>
+                        <div class = "">
+                            <%= f.text_field :points,  id: 'points', type: "number", class:"short-width", placeholder: "points" %>/<%=assignment.totalpoints%>
+                        </div>
+                      <%end%>
+                    </td>
+                    <td>
+                        <% @grade_percentile = (Float(@submission.points) /Float(assignment.totalpoints)) * 100 %>
+                        <p class = "green-text"><b><%= @grade_percentile.truncate(2) %>%</b></p>
+                    </td>
+                  <%else%>
+                    <td><p class = "yellow-text text-darken-2">Needs Grade</p></td>
+                    <td>
+                      <%= form_for(@submission, :html => {class: "short-width", role: "form"}) do  |f| %>
+                        <div class = "">
+                            <%= f.text_field :points,  id: 'points', type: "number", class:"short-width", placeholder: "points" %>/<%=assignment.totalpoints%>
+                        </div>
+                      <%end%>                      
+                    </td>          
+                    <td><p class = "grey-text text-lighten-2">N/A</p></td>
                   <%end%>
-                </td>
-                <td>
-                    <% @grade_percentile = (Float(@submission.points) /Float(assignment.totalpoints)) * 100 %>
-                    <p class = "green-text"><b><%= @grade_percentile.truncate(2) %>%</b></p>
-                </td>
+                <%else%>
+                  <!-- If Object Late -->
+                  <td>
+                    <span class = "inline">
+                      <div class = "inline">Submitted</div>
+                      <%if !@submission.ontime%>
+                        <div class = "red-text inline"><b>(Late)</b></div>
+                      <%end%>
+                    </span>
+                  </td>
+                  <td><p class = "grey-text text-lighten-2">N/A</p></td>
+                  <td><p class = "grey-text text-lighten-2">N/A</p></td>
+                <%end%>          
               <%else%>
-                <td><p class = "yellow-text text-darken-2">Needs Grade</p></td>
-                <td>
-                  <%= form_for(@submission, :html => {class: "short-width", role: "form"}) do  |f| %>
-                    <div class = "">
-                        <%= f.text_field :points,  id: 'points', type: "number", class:"short-width", placeholder: "points" %>/<%=assignment.totalpoints%>
-                    </div>
-                  <%end%>                      
-                </td>          
+                <td><p class = "red-text"><b>Missing </b>(Due <%=assignment.duedate.to_formatted_s(:month_and_year)%>) </p></td>
+                <td><p class = "grey-text text-lighten-2">N/A</p></td>
                 <td><p class = "grey-text text-lighten-2">N/A</p></td>
               <%end%>
-            <%else%>
-              <!-- If Object Late -->
-              <td>
-                <span class = "inline">
-                  <div class = "inline">Submitted</div>
-                  <%if !@submission.ontime%>
-                    <div class = "red-text inline"><b>(Late)</b></div>
-                  <%end%>
-                </span>
-              </td>
-              <td><p class = "grey-text text-lighten-2">N/A</p></td>
-              <td><p class = "grey-text text-lighten-2">N/A</p></td>
-            <%end%>          
-          <%else%>
-            <td><p class = "red-text"><b>Missing </b>(Due <%=assignment.duedate.to_formatted_s(:month_and_year)%>) </p></td>
-            <td><p class = "grey-text text-lighten-2">N/A</p></td>
-            <td><p class = "grey-text text-lighten-2">N/A</p></td>
-          <%end%>
+            <%end%>
+          </tr>
         <%end%>
-      </tr>
-    <%end%>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  <%else%>
+    <div class = "col s12 m12">
+      <div class = "top-padding xtramargintop xtrapadding" align = "center">
+        <i class="large material-icons icon-light-gray">lock</i>
+        <h3 class = 'blue-grey-text text-lighten-4'>You do not have permission to view this.</h3>
+        </div>
+    </div>
+  <%end%>
+<%end%>
