@@ -4,8 +4,8 @@
         <div class="card-content">
           <span class="card-title">
             <div class = "row">
-              <i class="material-icons circle">account_circle</i>
-              <b><%="#{obj.user.firstname} #{obj.user.lastname}" %> </b>
+              <i class="material-icons circle medium">account_circle</i>
+              <b><%=link_to obj.user.fullname, user_path(obj.user.id)%></b>
               <span class = "grey-text"><small>Submitted <%=obj.created_at.to_formatted_s(:month_and_year)%></small></span>
               <!-- If Object Late -->
               <%if !obj.ontime%>
@@ -39,15 +39,15 @@
             </div>
           </div>           
       </div>
-        <div align = "left">
-          <i class="material-icons icon-comment line-height">mode_comment</i><%=link_to "Leave a comment", class: 'grey-text margin-side'%>
-        </div>
         <!- Comment View->
+        <hr>
         <%@comments = obj.comments_submissions%>
         <%if @comments.size >0%>
           <% @comments.each do |comment| %>
-            <div>
-              <b><%=comment.user.fullname%></b> <%=comment.commentText%>
+          
+            <div class = "comment">
+            
+             <div class = "commentIcon"><i class="material-icons circle medium">account_circle</i></div><div class = "commentText"><div id = "rcorners1"><b><%=link_to comment.user.fullname, user_path(comment.user.id)%></b>&nbsp<%=comment.commentText%> </div></div>
             </div>
           <%end%>
         <%else%>
@@ -55,7 +55,12 @@
             <i class="large material-icons icon-light-gray">wb_sunny</i>
             <h3 class = 'blue-grey-text text-lighten-4'>No assignments turned in yet!</h3>
           </div>  
-        <%end%>      
+        <%end%>            
+        <!- Link to leave a comment->
+        <div align = "left">
+          <i class="material-icons icon-comment line-height">mode_comment</i><%=link_to "Leave a comment", class: 'grey-text margin-side'%>
+        </div>
+        
         <!- Comment Submission form->
         <div>
           <%= form_with model: @comment do |form| %>
