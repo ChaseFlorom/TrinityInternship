@@ -6,4 +6,8 @@ module SubmissionsHelper
       return false
     end
   end
+  
+  def comments
+    return comments_submissions
+  end
 end

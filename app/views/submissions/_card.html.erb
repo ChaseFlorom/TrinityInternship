@@ -42,8 +42,22 @@
         <div align = "left">
           <i class="material-icons icon-comment line-height">mode_comment</i><%=link_to "Leave a comment", class: 'grey-text margin-side'%>
         </div>
+        <!- Comment View->
+        <%@comments = obj.comments_submissions%>
+        <%if @comments.size >0%>
+          <% @comments.each do |comment| %>
+            <div>
+              <b><%=comment.user.fullname%></b> <%=comment.commentText%>
+            </div>
+          <%end%>
+        <%else%>
+          <div class = "top-padding" align = "center">
+            <i class="large material-icons icon-light-gray">wb_sunny</i>
+            <h3 class = 'blue-grey-text text-lighten-4'>No assignments turned in yet!</h3>
+          </div>  
+        <%end%>      
+        <!- Comment Submission form->
         <div>
-          <!- Comment Submission form->
           <%= form_with model: @comment do |form| %>
             <div class="field bullet">
               <%= form.label "Submission" %>
