@@ -31,7 +31,8 @@ class AssignmentsController < ApplicationController
     def show
         @assignment = Assignment.find(params[:id])
         @submission = Submission.new
-        @submissions = @assignment.submissions 
+        @submissions = @assignment.submissions
+        @comment = CommentsSubmission.new
     end
     
     def destroy
