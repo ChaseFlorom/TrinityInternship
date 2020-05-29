@@ -7,7 +7,7 @@ class CommentsSubmissionsController < ApplicationController
         @comment.user_id = current_user.id
         if @comment.save
             flash[:success] = "The comment was successfully submitted."
-            redirect_to assignment_path(root_path)
+            redirect_back(fallback_location: root_path)
         else 
             flash[:success] = "The comment was not submitted correctly, please try again."
             redirect_back(fallback_location: root_path)
@@ -19,6 +19,6 @@ class CommentsSubmissionsController < ApplicationController
     private
     
     def creation_params
-        params.permit(:comment)
+        params.require(:comments_submission).permit!
     end
 end
