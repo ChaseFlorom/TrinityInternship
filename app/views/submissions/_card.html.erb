@@ -46,8 +46,8 @@
           <% @comments.each do |comment| %>
           
             <div class = "comment">
-            
-             <div class = "commentIcon"><i class="material-icons circle medium">account_circle</i></div><div class = "commentText"><div id = "rcorners1"><b><%=link_to comment.user.fullname, user_path(comment.user.id)%></b>&nbsp<%=comment.commentText%> </div></div>
+             <div class = "commentIcon"><i class="material-icons circle medium">account_circle</i></div><div class = "commentText"><div id = "rcorners1"><b><%=link_to comment.user.fullname, user_path(comment.user.id)%></b>&nbsp<%=comment.commentText%><i class="material-icons commentmore">more_horiz</i>
+</div></div>
             </div>
           <%end%>
         <%else%>
