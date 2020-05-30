@@ -60,6 +60,13 @@ document.addEventListener("turbolinks:load", function() {
     var instances = M.Dropdown.init(elems, {constrainWidth: false});
   });
 
+document.addEventListener("turbolinks:load", function() {
+  $('.commentbutton').on("click", function() {
+     $('#commentbox').toggle();
+  });
+});
+
+
 
   
 require("trix")

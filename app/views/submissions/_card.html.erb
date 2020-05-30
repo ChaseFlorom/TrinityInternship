@@ -1,10 +1,12 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <div class="row">
     <div class="col s12 m12">
       <div class="card fill-width">
         <div class="card-content">
           <span class="card-title">
             <div class = "row">
-              <i class="material-icons circle medium">account_circle</i>
+              <i class="material-icons circle medium line-height">account_circle</i>
               <b><%=link_to obj.user.fullname, user_path(obj.user.id)%></b>
               <span class = "grey-text"><small>Submitted <%=obj.created_at.to_formatted_s(:month_and_year)%></small></span>
               <!-- If Object Late -->
@@ -54,22 +56,23 @@
             <ul id='<%=comment.id%>' class='dropdown-content'>
               <b>Comment Actions</b>
               <li class="divider" tabindex="-1"></li>
-              <li><a href="#!">Delete Comment</a></li>
+              <%if current_user.role == "teacher" || current_user.id == comment.user_id%>
+                <li>
+                  <%= link_to comments_submission_path(comment.id), method: :delete, data: {confirm: "Are you sure you want to delete this comment?"} do %>
+                    <span class = "line-height"><i class="material-icons">delete</i>Delete Comment</span>
+                  <% end %>
+                </li>
+              <%end%>
             </ul>
           <%end%>
-        <%else%>
-          <div class = "top-padding" align = "center">
-            <i class="large material-icons icon-light-gray">wb_sunny</i>
-            <h3 class = 'blue-grey-text text-lighten-4'>No assignments turned in yet!</h3>
-          </div>  
         <%end%>            
+        
         <!- Link to leave a comment->
         <div align = "left">
-          <i class="material-icons icon-comment line-height">mode_comment</i><%=link_to "Leave a comment", class: 'grey-text margin-side'%>
+          <i class="material-icons icon-comment line-height">mode_comment</i><a class = "grey-text margin-side commentbutton astext">Leave a Comment</a>
         </div>
-        
         <!- Comment Submission form->
-        <div>
+        <div class = "hidden commentbox" id = "commentbox">
           <%= form_with model: @comment do |form| %>
             <div class="field bullet">
               <%= form.label "Submission" %>
