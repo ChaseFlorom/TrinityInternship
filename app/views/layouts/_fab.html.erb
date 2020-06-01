@@ -5,15 +5,18 @@
             <i class="large material-icons">add</i>
           </a>
           <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
             <li>
-                <%= link_to new_assignment_path(:assignment_type => "Video"), :class=> "btn-floating green" do %>
+                <%= link_to interns_path(), :class=> "btn-floating green" do %>
+                    <i class="material-icons">person</i>
+                <% end %>
+            </li>
+            <li>
+                <%= link_to grades_path(), :class=> "btn-floating green" do %>
                     <i class="material-icons">import_contacts</i>
                 <% end %>
             </li>
             <li>
-                <%= link_to new_assignment_path(:name => "Chase"), :class=> "btn-floating blue" do %>
+                <%= link_to new_assignment_path(), :class=> "btn-floating blue" do %>
                     <i class="material-icons">assignment</i>
                 <% end %>
             </li>

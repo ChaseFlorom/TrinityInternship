@@ -5,6 +5,7 @@ class AssignmentsController < ApplicationController
 
     def new
           @assignment =  Assignment.new
+          @assignment.assignment_type = Assignment.options[0]
           if params[:unit_ids]
               puts "fired"
             @assignment.unit_ids = params[:unit_ids]
