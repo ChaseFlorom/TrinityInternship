@@ -35,7 +35,8 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { :host => 'https://10d6a46ad09c44f68234ae77518409d5.vfs.cloud9.us-east-1.amazonaws.com'}
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
