@@ -8,10 +8,11 @@ class AssignmentMailer < ApplicationMailer
     :subject => 'A teacher has created a new assignment' )
   end
 
-  def submission_email(user, subuser)
+  def submission_email(user, subuser, link)
     @user = user
     @subuser = subuser
+    @link = link
     mail( :to => @user.email,
-    :subject => 'A teacher has created a new assignment' )
+    :subject => 'A student has submitted an assignment' )
   end
 end
