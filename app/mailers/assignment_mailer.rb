@@ -9,6 +9,7 @@ class AssignmentMailer < ApplicationMailer
   end
 
   def submission_email(user, subuser, link)
+    
     @user = user
     @subuser = subuser
     @link = link
