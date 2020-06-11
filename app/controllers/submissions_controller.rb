@@ -9,6 +9,10 @@ class SubmissionsController < ApplicationController
         @submission.user_id = current_user.id
         @submission.ontime =  !@submission.assignment.duedate.past?
         if @submission.save
+            @teachers = User.where(role: "teacher")
+            @teachers.each do |teacher|
+                AssignmentMailer.submission_email(teacher, current_user).deliver
+            end
             flash[:success] = "The submission was successfully submitted."
             redirect_to assignment_path(@submission.assignment)
         else 
