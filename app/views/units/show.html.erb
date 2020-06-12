@@ -9,14 +9,22 @@
 <%if @assignments.size > 0%>
   <ul class="collapsible white">
     <% @assignments.each do |assignment| %>
+    
       <li>
+        <a class=" same-height assignmentmore dropdown-trigger " href='#' data-target='<%=assignment.id%>'><i class="material-icons">more_vert</i></a>
         <%if assignment.assignment_type == "Question"%>
-          <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%></div>
+          <div class="collapsible-header"><i class="material-icons">assignment</i><%=assignment.name%>
+</div>
         <%elsif assignment.assignment_type == "Video"%>
-          <div class="collapsible-header"><i class="material-icons">videocam</i><%=assignment.name%></div>
+          <div class="collapsible-header"><i class="material-icons">videocam</i><%=assignment.name%>
+</div>
         <%else%>
-          <div class="collapsible-header"><i class="material-icons">check_circle</i><%=assignment.name%></div>
+          <div class="collapsible-header">
+              <i class="material-icons">check_circle</i><%=assignment.name%>
+
+          </div>
         <%end%>
+
         <div class="collapsible-body">
           <h4><%=link_to assignment.name, assignment_path(assignment.id)%></h4>
           <p class = "lime-text text-darken-2">Due <%=assignment.duedate.to_formatted_s(:month_and_year)%></p>
@@ -25,9 +33,30 @@
             <hr>
             <%=link_to "Delete Assignment", assignment_path(assignment.id), method: :delete, data: {confirm: "Are you sure you want to delete this assignment?"}, class: 'red-text'%>          
           <%end%>
-
         </div>
       </li>
+      <!- Dropdown content ->
+      <ul id='<%=assignment.id%>' class='dropdown-content'>
+        <b>Assignment Actions</b>
+        <li class="divider" tabindex="-1"></li>
+          <li>
+            <%=link_to assignment_path(assignment.id) do%>
+               <span class = "line-height"><i class="material-icons">open_in_browser</i>Open Assignment</span>
+            <%end%>
+          </li>
+        <%if current_user.role == "teacher"%>
+          <li>
+            <%= link_to edit_assignment_path(assignment.id) do %>
+              <span class = "line-height"><i class="material-icons">edit</i>Edit Assignment</span>
+            <%end%>
+          </li>
+          <li>
+            <%= link_to assignment_path(assignment.id), method: :delete, data: {confirm: "Are you sure you want to delete this assignment?"} do %>
+              <span class = "line-height"><i class="material-icons">delete</i>Delete Assignment</span>
+            <% end %>
+          </li>
+        <%end%>
+      </ul>
     <%end%>
   </ul>
 <%else%>
@@ -36,3 +65,5 @@
           <h3 class = 'blue-grey-text text-lighten-4'>No Assignments!</h3>
     </div>
 <%end%>
+
+
