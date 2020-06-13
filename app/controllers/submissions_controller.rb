@@ -26,14 +26,22 @@ class SubmissionsController < ApplicationController
         end
     end
     
+    def edit
+    @submission = Submission.find(params[:id])
+    @assignment = @submission.assignment
+    require_current(@submission)
+    #require_current(@comment)
+    end
+    
     def update
          @submission = Submission.find(params[:id])
-        if @submission.update(submission_params)
-            flash.now[:success] = "The Grade has Successfully been Saved."
-            redirect_back(fallback_location: root_path)
+         @assignment = @submission.assignment
+        if @submission.update(update_params)
+            flash.now[:success] = "The Submission has Successfully been Saved."
+            redirect_to(assignment_path(@assignment))
         else
             flash.now[:danger] = "That didn't work, try again later."
-            redirect_back(fallback_location: root_path)
+            redirect_to(assignment_path(@assignment))
         end        
     end
     
@@ -50,8 +58,29 @@ class SubmissionsController < ApplicationController
     
     private
     
+    def if_comment_owner(submission)
+       if(submission.user_id == current_user.id)
+            return true
+        else
+            return false
+       end
+    end
+    
+    def require_current(submission)
+        if submission.user_id == current_user.id|| current_user.admin == true
+        
+        else    
+            redirect_to assignment_path(@assignment)
+            flash[:danger] = "You do not have the required permissions to do that."
+        end
+    end
+
     def submission_params
         params.require(:submission).permit(:user_id, :assignment_id, :content, :ontime, :points)
+    end
+    
+    def update_params
+        params.require(:submission).permit(:content)
     end
 
 end
