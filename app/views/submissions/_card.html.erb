@@ -17,7 +17,7 @@
               <%end%>
               <!-- If Object Graded -->
               <%if obj.assignment.totalpoints != 0%>
-                <%if obj.points != nil ||%>
+                <%if obj.points != nil%>
                   <div class="chip blue lighten-2">
                     <% @grade_percentile = (Float(obj.points) /Float(obj.assignment.totalpoints)) * 100 %>
                     <p align = "center"><b><%= @grade_percentile.truncate(2) %>%</b></p>
