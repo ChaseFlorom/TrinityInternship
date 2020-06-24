@@ -16,4 +16,11 @@ class AssignmentMailer < ApplicationMailer
     mail( :to => @user.email,
     :subject => 'A student has submitted an assignment' )
   end
+  
+  def announcement_email(user)
+    @user = user
+    mail( :to => @user.email,
+    :subject => 'A new announcement has been posted' )
+  end
+  
 end

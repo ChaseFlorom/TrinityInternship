@@ -15,6 +15,9 @@ class AnnouncementsController < ApplicationController
     @announcement.save
     if @announcement.save
         flash[:success] = "The announcement was successfully submitted."
+        User.all.each do |user|
+          AssignmentMailer.announcement_email(user).deliver
+        end
         redirect_back(fallback_location: root_path)
     else 
         flash[:success] = "Announcement was not submitted correctly, please try again."
