@@ -3,7 +3,10 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-
+  <p>
+    <label for="profileImage">Profile Picture</label>
+    <%= f.file_field :profileImage %>
+  </p>
   <div class = "row">
     <div class="input-field col s6">
       <i class="material-icons prefix">account_circle</i>

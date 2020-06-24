@@ -40,7 +40,14 @@
                   <%@fannouncement = @announcements.last%>
                   <%@a_user = @fannouncement.user%>
                   <span>
-                    <h5><i class="material-icons circle line-height">account_circle</i><%=link_to @a_user.fullname, user_path(@a_user.id)%></h5>  
+                    <h5>
+                      <%if @a_user.profileImage.present?%>
+                        <%= image_tag @a_user.profileImage_url.to_s, class: 'material-icons circle medium profImage line-height' %>
+                      <%else%>
+                        <i class="material-icons circle medium">account_circle</i>
+                      <%end%>
+                      <%=link_to @a_user.fullname, user_path(@a_user.id)%>
+                      </h5>  
                     <p class = "grey-text lighten-3"> posted on <%=@fannouncement.created_at.to_formatted_s(:month_and_year)%></p>
                   </span>
                   <hr>

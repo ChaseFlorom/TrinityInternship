@@ -5,7 +5,16 @@
   <div class="col s12 m12">
     <div class="card fill-width">
       <div class="card-content">
-        <span class="card-title"><div class = "line-height"><i class="material-icons circle">account_circle</i><%=link_to @user.fullname, user_path(@user.id)%></div></span>
+        <span class="card-title">
+          <div class = "">
+            <%if @user.profileImage.present?%>
+              <%= image_tag @user.profileImage_url.to_s, class: 'material-icons circle medium profImage line-height' %>
+            <%else%>
+              <i class="material-icons circle medium">account_circle</i>
+            <%end%>
+            <%=link_to @user.fullname, user_path(@user.id)%>
+          </div>
+          </span>
       <%=announcement.content%>
       </div>
       <%if current_user.role == "teacher"%>

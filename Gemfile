@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 gem 'devise'
+gem 'carrierwave'
 gem 'materialize-sass'
 gem 'youtube_rails'
 gem 'jquery-rails'
