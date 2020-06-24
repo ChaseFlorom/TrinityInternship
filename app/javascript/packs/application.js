@@ -66,7 +66,11 @@ document.addEventListener("turbolinks:load", function() {
   });
 });
 
-
+//tooltips
+document.addEventListener("turbolinks:load", function() {
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems);
+});
 
   
 require("trix")

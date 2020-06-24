@@ -1,5 +1,13 @@
 
 <h2 align = "center"><%=@assignment.name%></h2>
+<%if @assignment.visibility == "public"%>
+  <i class="material-icons circle medium line-height commentmore tooltipped" data-tooltip="Students can see the submissions of their peers and can comment on them.">visibility</i>
+  
+<%else%>
+  <i class="material-icons circle medium line-height commentmore tooltipped" data-tooltip="Students cannot see the submissions of their peers.">visibility_off</i>
+
+<%end%>
+
 <h4 align = "center">Due: <%=@assignment.duedate.to_formatted_s(:month_and_year)%></h2>
 <p><%=@assignment.description%></p>
 <%if @assignment.assignment_type == 'Video'%>
