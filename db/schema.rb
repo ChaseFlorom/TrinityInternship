@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_205710) do
+ActiveRecord::Schema.define(version: 2020_06_24_205531) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_05_30_205710) do
     t.string "assignment_type"
     t.string "link"
     t.integer "totalpoints", default: 0
+    t.string "visibility", default: "private"
   end
 
   create_table "assignments_units", id: false, force: :cascade do |t|
