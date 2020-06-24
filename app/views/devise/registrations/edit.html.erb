@@ -1,4 +1,14 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+ <span class="card-title">
+          <div class = "bigtext">
+            <%if @user.profileImage.present?%>
+              <%= image_tag @user.profileImage_url.to_s, class: 'material-icons circle medium profImage line-height' %>
+            <%else%>
+              <i class="material-icons circle medium">account_circle</i>
+            <%end%>
+              Edit Profile
+            </div>
+          </span>
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
