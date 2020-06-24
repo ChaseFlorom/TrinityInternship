@@ -9,6 +9,10 @@
             
         </div>
         <div class="form-group form-padding">
+            <%= f.label "Visibility: Public (Students can see the submissions of their peers), private (only teachers can see submissions)" %>
+            <%= f.select(:visibility, options_for_select(Assignment.visibility_options, params[:type]), {},  { :id => 'visibility' })%>
+        </div>
+        <div class="form-group form-padding">
             <%= f.label :assignment_type %>
             <%= f.select(:assignment_type, options_for_select(Assignment.options, params[:type]), {},  { :id => 'assign_type' })%>
         </div>

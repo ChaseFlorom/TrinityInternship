@@ -1,5 +1,6 @@
 class Assignment < ApplicationRecord
       TYPES = ["Question","Mark as Finished","Video"]
+      VISIBILITY_TYPES = ["private", "public"]
       has_rich_text :description
       has_many :submissions
       has_and_belongs_to_many :units
@@ -12,5 +13,9 @@ class Assignment < ApplicationRecord
       
     def self.options 
         TYPES.map {|type| [type.capitalize, type]}
+    end
+    
+    def self.visibility_options
+      VISIBILITY_TYPES.map{|type| [type.capitalize, type]}
     end
 end

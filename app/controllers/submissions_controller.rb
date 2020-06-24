@@ -14,7 +14,6 @@ class SubmissionsController < ApplicationController
             puts "LIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIINK"
             puts @link
             @teachers.each do |teacher|
-                
                 AssignmentMailer.submission_email(teacher, current_user, @link).deliver
             end
             flash[:success] = "The submission was successfully submitted."
@@ -40,7 +39,7 @@ class SubmissionsController < ApplicationController
             flash.now[:success] = "The Submission has Successfully been Saved."
             redirect_to(assignment_path(@assignment))
         else
-            flash.now[:danger] = "That didn't work, try again later."
+            flash.now[:success] = "That didn't work, try again later."
             redirect_to(assignment_path(@assignment))
         end        
     end
@@ -80,7 +79,7 @@ class SubmissionsController < ApplicationController
     end
     
     def update_params
-        params.require(:submission).permit(:content)
+        params.require(:submission).permit(:content, :points)
     end
 
 end

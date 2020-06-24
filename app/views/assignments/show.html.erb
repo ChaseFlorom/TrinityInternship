@@ -24,13 +24,26 @@
     
 <%else%>
   <div>
-     <%if @submissions.where(user_id: current_user.id).size > 0%>
-      <% @submissions.where(user_id: current_user.id).each do |submission| %>
-        <%= render 'submissions/card', obj: submission %>
-      <%end%>      
+    <%if @submissions.where(user_id: current_user.id).size > 0%>
+      <!--If assignment is public it should show ALL submissions, otherwise, it should only show the student's.-->
+      <%if @assignment.visibility == "public"%>
+        <%if @submissions.size >0%>
+          <% @submissions.each do |submission| %>
+              <%= render 'submissions/card', obj: submission %>
+          <%end%>
+        <%else%>
+          <div class = "top-padding" align = "center">
+              <i class="large material-icons icon-light-gray">wb_sunny</i>
+              <h3 class = 'blue-grey-text text-lighten-4'>No assignments turned in yet!</h3>
+          </div>  
+        <%end%>       
+      <%else%>
+        <% @submissions.where(user_id: current_user.id).each do |submission| %>
+          <%= render 'submissions/card', obj: submission %>
+        <%end%>    
+      <%end%>
     <%else%>
       <%= render 'submissions/form'%> 
     <%end%> 
   </div>
-
 <%end%>
