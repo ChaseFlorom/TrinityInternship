@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_220602) do
     t.datetime "duedate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "assignment_type"
+    t.string "assignment_type", default: "question"
     t.string "link"
     t.integer "totalpoints", default: 0
     t.string "visibility", default: "private"
@@ -67,20 +67,12 @@ ActiveRecord::Schema.define(version: 2020_06_24_220602) do
     t.integer "assignment_id", null: false
   end
 
-  create_table "comments_submission", force: :cascade do |t|
-    t.text "commentText"
-    t.integer "user_id"
-    t.integer "submission_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "comments_submissions", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.text "commentText"
     t.integer "user_id"
     t.integer "submission_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -90,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_220602) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "content"
     t.boolean "ontime"
-    t.integer "points"
+    t.integer "points", default: 0
   end
 
   create_table "units", force: :cascade do |t|
