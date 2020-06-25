@@ -22,7 +22,7 @@ class AssignmentMailer < ApplicationMailer
     @subuser = subuser
     @link = link
     mail( :to => @user.email,
-    :subject => 'A student has submitted an assignment' )
+    :subject => 'There is a new comment on your submission' )
   end
   
   def announcement_email(user)

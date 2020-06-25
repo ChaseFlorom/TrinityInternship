@@ -8,7 +8,7 @@ class CommentsSubmissionsController < ApplicationController
         @submission = @comment.submission
         @link = "https://www.trinityinternship.org/assignments/" + @submission.assignment.id.to_s
         if @submission.user != @comment.user
-            AssignmentMailer.submission_email(@submission.user, @comment.user, @link).deliver
+            AssignmentMailer.comment_email(@submission.user, @comment.user, @link).deliver
         else
             
         end

@@ -12,7 +12,7 @@ class SubmissionsController < ApplicationController
             @teachers = User.where(role: "teacher")
             @link = "https://www.trinityinternship.org/assignments/" + @submission.assignment.id.to_s
             @teachers.each do |teacher|
-                AssignmentMailer.comment_email(teacher, current_user, @link).deliver
+                AssignmentMailer.submission_email(teacher, current_user, @link).deliver
             end
             flash[:success] = "The submission was successfully submitted."
             redirect_to assignment_path(@submission.assignment)
