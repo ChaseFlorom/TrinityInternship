@@ -1,8 +1,9 @@
 class User < ApplicationRecord
   mount_uploader :profileImage, ProfileImageUploader
-  has_many :submissions
+  has_many :submissions, dependent: :destroy
   has_and_belongs_to_many :units
   has_many :assignments, :through => :units
+  has_many :comments_submissions, :through => :submissions, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # , :lockable, :timeoutable, :trackable and :omniauthable

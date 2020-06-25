@@ -2,7 +2,7 @@ class Assignment < ApplicationRecord
       TYPES = ["Question","Mark as Finished","Video"]
       VISIBILITY_TYPES = ["private", "public"]
       has_rich_text :description
-      has_many :submissions
+      has_many :submissions, dependent: :destroy
       has_and_belongs_to_many :units
       has_many :users, :through => :units
       accepts_nested_attributes_for :units

@@ -24,6 +24,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
         respond_with resource
       end
    end
+   
+    def destroy
+        puts "DESTROYED ********************************************************************************************************************************************************************"
+        @user = User.find(params[:id])
+        @comments = CommentsSubmission.where(user: @user)
+        @comments.destroy_all
+        @user.destroy
+        flash[:danger] = "The user has been deleted."
+        redirect_back(fallback_location: root_path)
+                
+    end    
 
   # If you have extra params to permit, append them to the sanitizer.
    def configure_sign_up_params

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   devise_for :users
   resources :users, :only => [:index, :show]
+  delete "users/:id", to: "users#destroy"
   get 'interns', to: 'users#index'
   get 'grades', to: 'grades#index'
   resources :units
