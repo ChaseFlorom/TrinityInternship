@@ -9,7 +9,7 @@
               <%if obj.user.profileImage.present?%>
                 <%= image_tag obj.user.profileImage_url.to_s, class: 'material-icons circle medium profImage line-height' %>
               <%else%>
-                <i class="material-icons circle medium">account_circle</i>
+                <i class="material-icons circle medium line-height">account_circle</i>
               <%end%>
               <b><%=link_to obj.user.fullname, user_path(obj.user.id)%></b>
               <span class = "grey-text"><small>Submitted <%=obj.created_at.to_formatted_s(:month_and_year)%></small></span>

@@ -11,8 +11,6 @@ class SubmissionsController < ApplicationController
         if @submission.save
             @teachers = User.where(role: "teacher")
             @link = "https://www.trinityinternship.org/assignments/" + @submission.assignment.id.to_s
-            puts "LIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIINK"
-            puts @link
             @teachers.each do |teacher|
                 AssignmentMailer.submission_email(teacher, current_user, @link).deliver
             end

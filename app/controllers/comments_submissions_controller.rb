@@ -5,6 +5,14 @@ class CommentsSubmissionsController < ApplicationController
     def create
         @comment = CommentsSubmission.new(creation_params)
         @comment.user_id = current_user.id
+        @submission = @comment.submission
+        @link = "https://www.trinityinternship.org/assignments/" + @submission.assignment.id.to_s
+        if @submission.user != @comment.user
+            AssignmentMailer.submission_email(@submission.user, @comment.user, @link).deliver
+        else
+            
+        end
+        
         if @comment.save
             flash[:success] = "The comment was successfully submitted."
             redirect_back(fallback_location: root_path)

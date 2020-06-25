@@ -14,6 +14,7 @@
             <%end%>
             <%=link_to @user.fullname, user_path(@user.id)%>
           </div>
+            <%=announcement.created_at.to_formatted_s(:month_and_year)%>
           </span>
       <%=announcement.content%>
       </div>
