@@ -117,11 +117,11 @@
         <%end%>            
         
         <!- Link to leave a comment->
-        <div align = "left">
-          <i class="material-icons icon-comment line-height">mode_comment</i><a class = "grey-text margin-side commentbutton astext">Leave a Comment</a>
+        <div align = "left" class = "commentbutton" id = "<%=obj.id.to_s%>">
+          <i class="material-icons icon-comment line-height">mode_comment</i><a class = "grey-text margin-side  astext">Leave a Comment</a>
         </div>
         <!- Comment Submission form->
-        <div class = "hidden commentbox" id = "commentbox">
+        <div class = "hidden commentbox" id = "<%="commentbox"+obj.id.to_s%>">
           <%= form_with model: @comment do |form| %>
             <div class="field bullet">
               <%= form.label "Submission" %>

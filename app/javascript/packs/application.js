@@ -62,7 +62,9 @@ document.addEventListener("turbolinks:load", function() {
 
 document.addEventListener("turbolinks:load", function() {
   $('.commentbutton').on("click", function() {
-     $('#commentbox').toggle();
+      var id = this.id
+      var box = "#commentbox" + id
+     $(box).toggle();
   });
 });
 
