@@ -11,7 +11,7 @@
         </div>
         <div class = "xtrapadding">
             <%=f.label "Select Intern(s)"%>
-            <%= f.collection_select(:user_ids, User.all, :id, (:fullname) , {placeholder: "Intern(s)"}, {multiple: true} )%>
+            <%= f.collection_select(:user_ids, User.where(role: "student"), :id, (:fullname) , {class: "stopDrop"}, {:multiple => true})%>
         </div>
         <div class="field">
             <b><%= f.label :description %></b>

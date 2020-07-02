@@ -72,6 +72,15 @@ document.addEventListener("turbolinks:load", function() {
     var instances = M.Tooltip.init(elems);
 });
 
+//Stop dropdowns from closign.
+document.addEventListener("turbolinks:load", function() {
+  $('.stopDrop').on("click", function() {
+     console.log("Test")
+     alert("test");
+     event.stopPropagation();
+  });
+});
+
   
 require("trix")
 require("@rails/actiontext")
