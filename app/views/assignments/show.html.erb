@@ -10,6 +10,12 @@
 
 <h4 align = "center">Due: <%=@assignment.duedate.to_formatted_s(:month_and_year)%></h2>
 <p><%=@assignment.description%></p>
+
+<%if @assignment.totalpoints != 0%>
+  <p class = blue-text>Assignment is worth <%=@assignment.totalpoints%> points</p>
+<%end%>
+
+<div float: "left"></div>
 <%if @assignment.assignment_type == 'Video'%>
 
   <div class = "videocontainer">
