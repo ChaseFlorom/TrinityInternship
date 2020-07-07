@@ -7,7 +7,7 @@
 <h2 align = "center">UNITS</h2>
 
 
-<div class="row">
+<div class="row2">
     <%if current_user.role == "teacher" || current_user.admin == true%>
       
     <%else%>
@@ -15,14 +15,14 @@
     <%end%>
       <%if @units.size > 0 %>
         <% @units.each do |unit| %>
-          <div class="col s12 m4">
+          <div class="col s12 m4 unitcol">
             <div class="card">
               <div class="card-image">
                 <%= link_to image_tag("office.jpg"), unit_path(unit.id) %>
                 <a class="btn-floating halfway-fab waves-effect waves-light grey dropdown-trigger" href='#' data-target='<%=unit.id%>'><i class="material-icons">settings</i></a>
               </div>
               <div class="card-content">
-                  <span class="card-title black-text"><%=link_to unit.name, unit_path(unit.id)%></span>
+                  <span class="card-title black-text"><%=link_to truncate(unit.name), unit_path(unit.id)%></span>
               </div>
               <div class="card-action">
                 <%=link_to "Open Unit", unit_path(unit.id)%>
