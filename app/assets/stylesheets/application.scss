@@ -223,4 +223,9 @@ main {
     justify-content:flex-start;
     flex-flow: row wrap;
     width:100%;
+
+}
+
+div#bullets ul li {
+    list-style-type: disc !important;
 }

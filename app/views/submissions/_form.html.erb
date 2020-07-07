@@ -1,32 +1,33 @@
 <%= render 'shared/errors', obj: @submission %>
 
-
-<%= form_with model: @submission do |form| %>
-
-  <%= form.text_field :assignment_id, value: @assignment.id, class: 'hidden' %>
-  <%if @assignment.assignment_type == "Mark as Finished"%>
-    <%= form.text_field :content, value: "#{current_user.firstname} has marked this assignment as completed", class: 'hidden' %>
-    <div class="form-group" id="submitbutton">
-      <div align = "center">
-          <%= form.submit "Mark as finished",  class: "btn waves-effect waves-light" %>
+<div id = "bullets">
+  <%= form_with model: @submission do |form| %>
+  
+    <%= form.text_field :assignment_id, value: @assignment.id, class: 'hidden' %>
+    <%if @assignment.assignment_type == "Mark as Finished"%>
+      <%= form.text_field :content, value: "#{current_user.firstname} has marked this assignment as completed", class: 'hidden' %>
+      <div class="form-group" id="submitbutton">
+        <div align = "center">
+            <%= form.submit "Mark as finished",  class: "btn waves-effect waves-light" %>
+        </div>
+      </div>  
+    <%elsif @assignment.assignment_type == "Video"%>
+      <%= form.text_field :content, value: "#{current_user.firstname} has watched the video.", class: 'hidden' %>
+      <div class="form-group" id="submitbutton">
+        <div align = "center">
+            <%= form.submit "Mark video as watched",  class: "btn waves-effect waves-light margin" %>
+        </div>
+      </div>  
+    <%else%>
+      <div class="field bullet">
+        <%= form.label "Submission" %>
+        <%= form.rich_text_area :content %>
       </div>
-    </div>  
-  <%elsif @assignment.assignment_type == "Video"%>
-    <%= form.text_field :content, value: "#{current_user.firstname} has watched the video.", class: 'hidden' %>
-    <div class="form-group" id="submitbutton">
-      <div align = "center">
-          <%= form.submit "Mark video as watched",  class: "btn waves-effect waves-light margin" %>
+      <div class="form-group" id="submitbutton">
+        <div align = "center">
+            <%= form.submit "Submit Assignment",  class: "btn waves-effect waves-light" %>
+        </div>
       </div>
-    </div>  
-  <%else%>
-    <div class="field bullet">
-      <%= form.label "Submission" %>
-      <%= form.rich_text_area :content %>
-    </div>
-    <div class="form-group" id="submitbutton">
-      <div align = "center">
-          <%= form.submit "Submit Assignment",  class: "btn waves-effect waves-light" %>
-      </div>
-    </div>
-  <%end%>
-<% end %>
+    <%end%>
+  <% end %>  
+</div>
