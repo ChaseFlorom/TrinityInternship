@@ -185,10 +185,10 @@ main {
 }
 
 .img-circular{
- width: 200px;
- height: 200px;
- background-size: cover;
- display: block;
+     width: 200px;
+     height: 200px;
+     background-size: cover;
+     display: block;
 }
 
 .profImage {
@@ -202,4 +202,10 @@ main {
 
 .commentback {
     color: grey;
+}
+
+.wtext {
+    text-color: white !important;
+    color: white!important;
+    font-weight: bold;
 }
