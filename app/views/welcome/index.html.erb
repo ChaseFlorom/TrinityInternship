@@ -1,3 +1,4 @@
+
 <%if user_signed_in?%>
   <h1>Welcome, <%=current_user.fullname if current_user.firstname%></h1>
   <%if current_user.role == "teacher" || current_user.role == "admin"%> 

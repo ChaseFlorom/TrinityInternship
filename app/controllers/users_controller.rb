@@ -10,12 +10,16 @@ class UsersController < ApplicationController
 
     def destroy
         puts "DESTROYED ********************************************************************************************************************************************************************"
-        @user = User.find(params[:id])
-        @comments = CommentsSubmission.where(user: @user)
-        @comments.destroy_all
-        @user.destroy
-        flash[:danger] = "The user has been deleted."
-        redirect_to(welcome_index_path)
-                
+            if current_user.role == "teacher" || current_user.admin == true
+            @user = User.find(params[:id])
+            @comments = CommentsSubmission.where(user: @user)
+            @comments.destroy_all
+            @user.destroy
+            flash[:danger] = "The user has been deleted."
+            redirect_to(welcome_index_path)
+        else
+            flash[:danger] = "You do not have permission to do that."
+        end
+   
     end    
 end
