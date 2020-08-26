@@ -20,7 +20,7 @@ class AssignmentsController < ApplicationController
         if @assignment.save
             @link = "https://www.trinityinternship.org/assignments/" + @assignment.id.to_s
             @assignment.users.each do |student|
-                AssignmentMailer.comment_email(student, @link).deliver
+                AssignmentMailer.send_email(student, @link).deliver
             end
             flash[:success] = "The assignment was successfully submitted."
             redirect_to unit_path(@assignment.units.ids)
