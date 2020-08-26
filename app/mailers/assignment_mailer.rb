@@ -1,9 +1,10 @@
 class AssignmentMailer < ApplicationMailer
-   default :from => 'chaseflorom@gmail.com'
+   default :from => 'cflorom@trinitylife.org'
 
   # send a signup email to the user, pass in the user object that   contains the user's email address
-  def send_email(user)
+  def send_email(user, link)
     @user = user
+    @link = link
     mail( :to => @user.email,
     :subject => 'A teacher has created a new assignment' )
   end

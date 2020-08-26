@@ -18,7 +18,7 @@ class AssignmentsController < ApplicationController
             @assignment.duedate = @assignment.duedate.change({ hour: 23, min: 59, sec: 59 })
         end
         if @assignment.save
-            AssignmentMailer.send_email(current_user).deliver
+            @link = "https://www.trinityinternship.org/assignments/" + @assignment.id.to_s
             flash[:success] = "The assignment was successfully submitted."
             redirect_to unit_path(@assignment.units.ids)
         else 
